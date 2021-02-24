@@ -1,15 +1,20 @@
 import './App.css';
 import './components/Books.js'
 import Books from './components/Books.js';
-import BookView from './components/BookView.js'
+import 'materialize-css';
+import { Row, Col, Container } from 'react-materialize';
+
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
+    <div>
+      <Container>
       <Books></Books>
-      <BookView></BookView>
-      </header>
+      </Container>
+        
+         
+      
     </div>
   );
 }

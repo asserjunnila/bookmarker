@@ -1,0 +1,23 @@
+DELETE http://localhost:8080/book/60154273b086611523228100 HTTP/1.1
+
+###
+
+GET http://localhost:8080/books HTTP/1.1
+
+
+###
+
+POST http://localhost:8080/books HTTP/1.1
+content-type: application/json
+
+{
+    "bookName": "testi2",
+    "bookAuthor": "test2",
+    "bookImg": "test2",
+    "bookMark": "0",
+    "bookMarkDate": "2021-02-24T08:00:00.000Z",
+    "bookPages": "100",
+    "readStartDate": "2021-02-24T07:00:00.000Z"
+}
+
+####

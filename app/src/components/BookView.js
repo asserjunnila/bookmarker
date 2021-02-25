@@ -1,9 +1,10 @@
-function BookView() {
+import {Button, Modal} from 'bootstrap'
+
+function BookView(props) {
+    
     return (
-      <div className="Books">
-          books here 
-      </div>
-    );
-  }
+        <div></div>
+      );
+    }
   
-  export default BookView;
+export default BookView;

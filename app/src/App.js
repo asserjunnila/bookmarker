@@ -1,15 +1,11 @@
-import './App.css';
 import './components/Books.js'
 import Books from './components/Books.js';
-import BookView from './components/BookView.js'
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
+    <div class="container">
       <Books></Books>
-      <BookView></BookView>
-      </header>
     </div>
   );
 }

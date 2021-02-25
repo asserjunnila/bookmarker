@@ -1,10 +1,12 @@
 const express = require('express')
 const bodyParser = require('body-parser');
+const cors = require('cors')
 
 const app = express()
+app.use(cors())
 
 const dotenv = require('dotenv');
-dotenv.config({path: './config/.env'});
+dotenv.config({ path: './config/.env' });
 
 const DB_URL = process.env.DB_URL || "mongodb://localhost:27017/books"
 
@@ -17,10 +19,10 @@ const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
 mongoose.connect(DB_URL, {
-	useNewUrlParser: true,
+    useNewUrlParser: true,
     useUnifiedTopology: true,
 }).then(() => {
-    console.log("Successfully connected to the database", DB_URL);    
+    console.log("Successfully connected to the database", DB_URL);
 }).catch(err => {
     console.log(`Could not connect to the database ${DB_URL}. Exiting now...`, err);
     process.exit();
@@ -29,13 +31,13 @@ mongoose.connect(DB_URL, {
 
 
 app.get('/', (req, res) => {
-    res.json({"message": "Welcome to the book database backend."});
+    res.json({ "message": "Welcome to the book database backend." });
 });
 
 require('./routes/routes.js')(app);
 
-const port =  process.env.PORT || 8080
+const port = process.env.PORT || 8080
 
 app.listen(port, () => {
-  console.log(`Server listening at http://localhost:${port}`)
+    console.log(`Server listening at http://localhost:${port}`)
 })

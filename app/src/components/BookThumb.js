@@ -1,24 +1,23 @@
 import 'materialize-css';
-import { Card, Col, Button, Icon, Row, Modal} from 'react-materialize';
+import { Card, Col, Button, Icon, Row, Modal, CardTitle} from 'react-materialize';
+import BookView from './BookView';
 
 
 function BookThumb(props) {
+
     return (
       <div>    
-        <Col m={4} s={6}>
-        <Card>
-        <img alt="img" src={props.img}></img>
+        <Col m={6} s={6}>
+        <Card 
+        header={<CardTitle image={props.book.bookImg}></CardTitle>}
+        >
         <Row>
-            <Col m={6} s={6}>
-            <h4>{props.name}</h4>
-            <h5>{props.author}</h5>
+            <Col m={12} s={12}>
+            <h4>{props.book.bookName}</h4>
+            <h5>{props.book.bookAuthor}</h5>
             </Col>
         </Row>
         <Row>
-            <Col m={8} s={8}>
-            </Col>
-            <Col m={4} s={4}>
-            
             <Modal
             actions={[
                 <Button 
@@ -42,21 +41,18 @@ function BookThumb(props) {
                 opacity: 0.5,
                 outDuration: 250,
                 preventScrolling: true,
-                startingTop: '4%'
+                startingTop: '4%',
+                
             }}
             trigger={<Button
                 className="red"
                 floating
+                node="button"
                 icon={<Icon>edit</Icon>}
                 ></Button>}
             >
-            <img alt="img" src={props.img}></img>
-            <h2>{props.name}</h2>
-            <h3>{props.author}</h3>
-            <p>
-            </p>
+            <BookView book={props.book} ></BookView>
             </Modal>
-            </Col>
         </Row>
         </Card>
         </Col>

@@ -1,4 +1,4 @@
-DELETE http://localhost:8080/book/60154273b086611523228100 HTTP/1.1
+DELETE http://localhost:8080/books/603696460909e00863a3f596 HTTP/1.1
 
 ###
 
@@ -11,9 +11,9 @@ POST http://localhost:8080/books HTTP/1.1
 content-type: application/json
 
 {
-    "bookName": "testi2",
-    "bookAuthor": "test2",
-    "bookImg": "test2",
+    "bookName": "muumilaakson tarinoita 4",
+    "bookAuthor": "nuuskamuikkunenasdasd",
+    "bookImg": "https://kbimages1-a.akamaihd.net/f16e3461-030b-41c0-aed5-03e1a54c3dea/1200/1200/False/design-a-book-cover.jpg",
     "bookMark": "0",
     "bookMarkDate": "2021-02-24T08:00:00.000Z",
     "bookPages": "100",
@@ -21,3 +21,16 @@ content-type: application/json
 }
 
 ####
+
+PUT http://localhost:8080/books/6036f568ccbdca017cc941a4 HTTP/1.1
+content-type: application/json
+
+{
+    "bookName": "muumilaakson tarinoita 22",
+    "bookAuthor": "nuuskamuikkunen",
+    "bookImg": "https://kbimages1-a.akamaihd.net/f16e3461-030b-41c0-aed5-03e1a54c3dea/1200/1200/False/design-a-book-cover.jpg",
+    "bookMark": "0",
+    "bookMarkDate": "2021-02-24T08:00:00.000Z",
+    "bookPages": "100",
+    "readStartDate": "2021-02-24T07:00:00.000Z"
+}

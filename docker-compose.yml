@@ -1,1 +1,31 @@
-version: "3.8"
+version: "3"
+
+services:
+  backend:
+    container_name: bookmarker-backend
+    env_file: .env
+    links:
+      - "db"
+    image: bookmarker-backend:0.1
+    build: ./backend
+    depends_on:
+      - db
+    #volumes:
+    #  - ./backend:/app
+    ports:
+      - "${BACKEND_PORT}:${BACKEND_PORT}"
+    command: npm start
+
+  db:
+    container_name: bookmarker-db
+    env_file: .env
+    #links:
+  #    - "backend"
+    image: mongo:4.4-bionic
+    #    volumes:
+    #      - bookmongo:/data/db
+    ports:
+      - "${MDB_PORT}:${MDB_PORT}"
+      #volumes:
+#  bookmongo:
+

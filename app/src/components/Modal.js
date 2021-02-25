@@ -1,9 +1,9 @@
 
 
-const Modal = ({handleClose, show, children }) => { 
+const Modal = ({ handleClose, show, children }) => {
   let showHideClassName = show ? 'display-block modal' : 'modal display-none';
   console.log(showHideClassName)
-  
+
   return (
     <div className={showHideClassName}>
       <div className="modal-main">
@@ -18,7 +18,7 @@ const Modal = ({handleClose, show, children }) => {
         </div>
         {children}
         <button onClick={handleClose}>
-        Close
+          Close
         </button>
       </div>
     </div>

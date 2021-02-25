@@ -5,11 +5,12 @@ const cors = require('cors')
 const app = express()
 app.use(cors())
 
-const dotenv = require('dotenv');
-dotenv.config({ path: './config/.env' });
+//const dotenv = require('dotenv');
+//dotenv.config({ path: './config/.env' });
 
-const DB_URL = process.env.DB_URL || "mongodb://localhost:27017/books"
-
+//const DB_URL = process.env.MDB_URL || "mongodb://db:27018/books"
+const DB_URL = "mongodb://db:27017/books"
+console.log(DB_URL)
 app.use(bodyParser.urlencoded({ extended: true }))
 
 app.use(bodyParser.json())

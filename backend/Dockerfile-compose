@@ -7,9 +7,9 @@ WORKDIR /app
 ENV PATH /app/node_modules/.bin:$PATH
 COPY package.json-compose /app/package.json
 
-RUN npm install
+RUN npm install --no-package-lock
 
 # Using volume mount with compose but lets make sure it works stand alone
-COPY . .
+#COPY . .
 
-CMD ["npm", "start"]
+CMD ["npm", "run", "dev"]

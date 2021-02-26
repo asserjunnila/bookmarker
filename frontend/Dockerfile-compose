@@ -1,0 +1,11 @@
+FROM node:14.16
+
+WORKDIR /app
+
+COPY package.json-compose /app/package.json
+RUN npm install --no-package-lock
+
+# We dont need to copy source codes since we will use docker-compose bind mounts
+#COPY . .
+
+CMD ["npm", "start"]

@@ -8,9 +8,9 @@ app.use(cors())
 //const dotenv = require('dotenv');
 //dotenv.config({ path: './config/.env' });
 
-//const DB_URL = process.env.MDB_URL || "mongodb://db:27018/books"
-//TODO: add env variables and make sure localhost is not used
-const DB_URL = process.env.MONGO_URL || "mongodb://localhost:27017/books"
+const port = process.env.REACT_APP_BACKPORT || 8080
+const DB_URL = process.env.MONGO_URL || "mongodb://localhost:27018/books"
+
 console.log(DB_URL)
 app.use(bodyParser.urlencoded({ extended: true }))
 
@@ -30,15 +30,11 @@ mongoose.connect(DB_URL, {
     process.exit();
 });
 
-
-
 app.get('/', (req, res) => {
     res.json({ "message": "Welcome to the book database backend." });
 });
 
 require('./routes/routes.js')(app);
-
-const port = process.env.PORT || 8080
 
 app.listen(port, () => {
     console.log(`Server listening at http://localhost:${port}`)

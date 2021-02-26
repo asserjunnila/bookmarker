@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-
 function BookThumb(props) {
 
   const [ bookName, setBookName ] = useState(props.book.bookName);
@@ -18,7 +17,6 @@ function BookThumb(props) {
   useEffect(() => {
 
   })
-
   const [ editable, setEditable ] = useState(false)
 
   function setStateEditable() {
@@ -31,7 +29,7 @@ function BookThumb(props) {
 
   function removeBook(event) {
 
-    fetch(`http://localhost:8080/book/${props.book._id}`, {
+    fetch(`http://localhost:${process.env.REACT_APP_BACKPORT}/book/${props.book._id}`, {
       method: 'DELETE',
       body: "body"
     }).then(response => response.json())
@@ -55,7 +53,8 @@ function BookThumb(props) {
       "bookPages": bookPages,
       "readStartDate": readStartDate
     }
-    fetch(`http://localhost:8080/book/${props.book._id}`, {
+
+    fetch(`http://localhost:${process.env.REACT_APP_BACKPORT}/book/${props.book._id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',

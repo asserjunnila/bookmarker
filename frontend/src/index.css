@@ -64,3 +64,9 @@ img {
   position: absolute;
   top: 0rem;
 }
+
+.add-button {
+  position: absolute;
+  top: 1rem;
+  right: -2rem;
+}

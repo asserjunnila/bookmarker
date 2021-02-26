@@ -5,7 +5,7 @@ WORKDIR /app
 
 # add node_modules/.bin to path
 ENV PATH /app/node_modules/.bin:$PATH
-#COPY package.json /app/package.json
+COPY package.json-compose /app/package.json
 
 #RUN npm install
 
@@ -17,4 +17,4 @@ ENV PATH /app/node_modules/.bin:$PATH
 
 #EXPOSE $BACKEND_PORT
 
-CMD ["npm", "dev"]
+CMD ["npm", "start"]

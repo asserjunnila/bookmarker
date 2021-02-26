@@ -64,11 +64,11 @@ exports.findOne = (req, res) => {
 };
 
 exports.update = (req, res) => {
+    //console.log(req)
     // Validate Request
-    if (!req.body.bookName || !req.body.bookAuthor || !req.body.bookMark
-        || !req.body.bookMarkDate || !req.body.bookPages || !req.body.readStartDate) {
+    if (!req.body.bookName || !req.body.bookAuthor || !req.body.bookMarkDate || !req.body.bookPages || !req.body.readStartDate) {
         return res.status(400).send({
-            message: "needed book info can not be empty"
+            message: `needed book info can not be empty`
         });
     }
 

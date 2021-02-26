@@ -7,7 +7,7 @@ GET http://localhost:8080/books HTTP/1.1
 
 ###
 
-POST http://localhost:8080/books HTTP/1.1
+POST http://localhost:8080/book HTTP/1.1
 content-type: application/json
 
 {
@@ -22,7 +22,7 @@ content-type: application/json
 
 ####
 
-PUT http://localhost:8080/books/'+'60381d9e8a35a00169dd41b9 HTTP/1.1
+PUT http://localhost:8080/books/60381d9f8a35a00169dd41bf HTTP/1.1
 content-type: application/json
 
 {
@@ -30,7 +30,7 @@ content-type: application/json
     "bookAuthor": "Jariii",
     "bookImg": "https://d1csarkz8obe9u.cloudfront.net/posterpreviews/action-thriller-book-cover-design-template-3675ae3e3ac7ee095fc793ab61b812cc_screen.jpg?ts=1588152105",
     "bookMark": "1",
-    "bookMarkDate": "2021-02-24",
+    "bookMarkDate": "2021",
     "bookPages": "100",
-    "readStartDate": "2021-02-24"
+    "readStartDate": "2021"
 }

@@ -1,0 +1,18 @@
+version: "3.9"
+
+services:
+  mongoloidi:
+    container_name: kirja-mongo
+    image: mongo:4.4-bionic
+    ports:
+      - 1337:27017
+  
+  baccychan:
+    container_name: kirja-back
+    image: kirja-back-dev:0.2
+    build: 
+      context: ./backend
+      dockerfile: Dockerfile-compose
+    command: node index.js
+    environment: 
+      - MONGO_URI=mongodb://mongoloidi:27017/books

@@ -51,7 +51,7 @@ function Books() {
 
 */
 
-  function addBook() {
+  const addBook = () => {
     // API call for creating a new book
     const payload = {
       "bookName": "bookName",
@@ -70,7 +70,7 @@ function Books() {
       body: JSON.stringify(payload)
     }).then(response => response.json())
       .then(data => console.log(data))
-    window.location.reload()
+    //window.location.reload()
   }
 
   return (

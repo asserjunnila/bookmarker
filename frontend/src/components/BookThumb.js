@@ -38,8 +38,8 @@ function BookThumb(props) {
       .then(data => console.log(data))
 
     //console.log(event.target.parentElement.parentElement.parentElement.toString())
-    window.location.reload()
-
+    //window.location.reload()
+    event.target.parentElement.parentElement.parentElement.parentElement.remove()
   }
 
   function updateBookValues() {

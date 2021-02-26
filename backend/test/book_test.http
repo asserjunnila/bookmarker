@@ -7,14 +7,14 @@ GET http://localhost:8080/books HTTP/1.1
 
 ###
 
-POST http://localhost:8080/books HTTP/1.1
+POST http://localhost:8080/book HTTP/1.1
 content-type: application/json
 
 {
-    "bookName": "muumilaakson tarinoita 4",
-    "bookAuthor": "nuuskamuikkunenasdasd",
-    "bookImg": "https://kbimages1-a.akamaihd.net/f16e3461-030b-41c0-aed5-03e1a54c3dea/1200/1200/False/design-a-book-cover.jpg",
-    "bookMark": "0",
+    "bookName": "Jari Sillanpää",
+    "bookAuthor": "Jariii",
+    "bookImg": "https://d1csarkz8obe9u.cloudfront.net/posterpreviews/action-thriller-book-cover-design-template-3675ae3e3ac7ee095fc793ab61b812cc_screen.jpg?ts=1588152105",
+    "bookMark": "10",
     "bookMarkDate": "2021-02-24T08:00:00.000Z",
     "bookPages": "100",
     "readStartDate": "2021-02-24T07:00:00.000Z"
@@ -22,15 +22,15 @@ content-type: application/json
 
 ####
 
-PUT http://localhost:8080/books/6036f568ccbdca017cc941a4 HTTP/1.1
+PUT http://localhost:8080/books/60381d9f8a35a00169dd41bf HTTP/1.1
 content-type: application/json
 
 {
-    "bookName": "muumilaakson tarinoita 22",
-    "bookAuthor": "nuuskamuikkunen",
-    "bookImg": "https://kbimages1-a.akamaihd.net/f16e3461-030b-41c0-aed5-03e1a54c3dea/1200/1200/False/design-a-book-cover.jpg",
-    "bookMark": "0",
-    "bookMarkDate": "2021-02-24T08:00:00.000Z",
+    "bookName": "Jari Sillanpää",
+    "bookAuthor": "Jariii",
+    "bookImg": "https://d1csarkz8obe9u.cloudfront.net/posterpreviews/action-thriller-book-cover-design-template-3675ae3e3ac7ee095fc793ab61b812cc_screen.jpg?ts=1588152105",
+    "bookMark": "1",
+    "bookMarkDate": "2021",
     "bookPages": "100",
-    "readStartDate": "2021-02-24T07:00:00.000Z"
+    "readStartDate": "2021"
 }

@@ -1,0 +1,103 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  animation: rotation 0s infinite linear;
+
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+
+.card {
+  width: 18.2rem;
+  height: auto;
+  margin-right: 0.5rem;
+  margin-top: 1rem;
+  transition: transform .2s; /* Animation */
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+
+.card:hover {
+  transform: scale(1.003); 
+}
+
+
+.card .card-body {
+  padding: 1rem 1rem
+}
+
+.edit-button {
+  position: absolute;
+  margin-top: -2rem;
+  right: 0rem;
+}
+
+img {
+  object-fit: cover;
+  width: 100%;
+  height: auto;
+}
+
+.card-title {
+  margin-bottom: -0.20rem;
+}
+
+.remove-button {
+  position: absolute;
+  top:0rem;
+}
+
+.add-button {
+  position: absolute;
+  top: 1rem;
+  right: -5rem;
+}
+
+textarea {
+  resize: none;
+  width: 100%;
+  height: 2rem;
+  overflow: hidden;
+  border: none;
+  margin-bottom: -1rem;
+}
+
+.book-name {
+  width: 100%;
+}
+
+.book-author {
+  width: 100%;
+}
+
+.datepicker {
+  width: 100%;
+  border: none;
+}
+
+.img-edit {
+  position: absolute;
+  top: 10rem;
+  background-color: white;
+  left: -10%;
+  width: 120%;
+  height: 2rem;
+  font-size: xx-small;
+
+}

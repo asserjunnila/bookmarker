@@ -1,0 +1,8 @@
+# So we dont accidentally include cache folders or git repo itself
+.git
+.cache
+
+node_modules
+
+# Not sure if really useful on the long run but we want to start fresh
+package-lock.json

@@ -9,11 +9,7 @@ function Books() {
   useEffect(() => {
     const fetchBooks = async () => {
       try {
-
-
-
         const response = await fetch(`http://localhost:${process.env.REACT_APP_BACKPORT}/books`)
-
         const json = await response.json()
         setBooks(json)
       } catch (error) {

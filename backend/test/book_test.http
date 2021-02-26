@@ -1,4 +1,4 @@
-DELETE http://localhost:8080/book/60391c5b4143f523ee99aebe HTTP/1.1
+DELETE http://localhost:8080/books/603696460909e00863a3f596 HTTP/1.1
 
 ###
 

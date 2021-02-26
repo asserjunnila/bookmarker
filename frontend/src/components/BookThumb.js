@@ -6,20 +6,20 @@ import "react-datepicker/dist/react-datepicker.css";
 
 function BookThumb(props) {
 
-  const [bookName, setBookName] = useState(props.book.bookName);
-  const [bookAuthor, setBookAuthor] = useState(props.book.bookAuthor);
-  const [bookMark, setBookMark] = useState(props.book.bookMark);
-  const [bookImg, setBookImg] = useState(props.book.bookImg);
-  const [bookMarkDate, setBookMarkDate] = useState(props.book.bookMarkDate);
-  const [bookPages, setBookPages] = useState(props.book.bookPages);
-  const [readStartDate, setReadStartDate] = useState(props.book.readStartDate);
+  const [ bookName, setBookName ] = useState(props.book.bookName);
+  const [ bookAuthor, setBookAuthor ] = useState(props.book.bookAuthor);
+  const [ bookMark, setBookMark ] = useState(props.book.bookMark);
+  const [ bookImg, setBookImg ] = useState(props.book.bookImg);
+  const [ bookMarkDate, setBookMarkDate ] = useState(props.book.bookMarkDate);
+  const [ bookPages, setBookPages ] = useState(props.book.bookPages);
+  const [ readStartDate, setReadStartDate ] = useState(props.book.readStartDate);
 
 
   useEffect(() => {
 
   })
 
-  const [editable, setEditable] = useState(false)
+  const [ editable, setEditable ] = useState(false)
 
   function setStateEditable() {
     setEditable(true)

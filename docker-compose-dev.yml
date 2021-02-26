@@ -2,17 +2,56 @@ version: "3.9"
 
 services:
   mongoloidi:
-    container_name: kirja-mongo
+    container_name: book-mongo-dev
     image: mongo:4.4-bionic
+    volumes:
+      - mongo-dev:/data/db
     ports:
       - 1337:27017
   
   baccychan:
-    container_name: kirja-back
-    image: kirja-back-dev:0.2
+    container_name: book-back-dev
+    env_file: .env-dev
+    image: book-back-dev:${TAG}
     build: 
       context: ./backend
       dockerfile: Dockerfile-compose
-    command: node index.js
+    ports:
+      - ${REACT_APP_BACKPORT}:${REACT_APP_BACKPORT}
+    depends_on:
+      - mongoloidi
+    volumes:
+      - ./backend:/app
+      - ./backend/package.json-compose:/app/package.json
+    command: npm run dev
     environment: 
-      - MONGO_URI=mongodb://mongoloidi:27017/books
+      - MONGO_URL=mongodb://mongoloidi:27017/books
+
+  furunto:
+    container_name: book-front-dev
+    env_file: .env-dev
+    image: book-front-dev:${TAG}
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile-compose
+    ports:
+      - ${PORT}:${PORT}
+    depends_on: 
+      - mongoloidi
+    volumes: 
+      - ./frontend:/app
+      - ./frontend/package.json-compose:/app/package.json
+    environment:
+      - NODE_ENV=development     # Not needed maybe?
+      - CHOKIDAR_USEPOLLING=true # Needed for bind mounts on OSX
+    command: npm start
+
+volumes:
+  mongo-dev:
+
+#docker-compose env variable precedence
+# Compose file
+# Shell environment variables
+# Environment file
+# Dockerfile
+# Variable is not defined

@@ -1,20 +1,19 @@
 import React, { useState } from 'react';
 //import { useEffect } from 'react';
 
-
 function BookThumb(props) {
 
-  const [bookName, setBookName] = useState(props.book.bookName);
-  const [bookAuthor, setBookAuthor] = useState(props.book.bookAuthor);
-  const [bookMark, setBookMark] = useState(props.book.bookMark);
-  const [bookImg, setBookImg] = useState(props.book.bookImg);
-  const [bookMarkDate, setBookMarkDate] = useState(props.book.bookMarkDate);
-  const [bookPages, setBookPages] = useState(props.book.bookPages);
-  const [readStartDate, setReadStartDate] = useState(props.book.readStartDate);
+  const [ bookName, setBookName ] = useState(props.book.bookName);
+  const [ bookAuthor, setBookAuthor ] = useState(props.book.bookAuthor);
+  const [ bookMark, setBookMark ] = useState(props.book.bookMark);
+  const [ bookImg, setBookImg ] = useState(props.book.bookImg);
+  const [ bookMarkDate, setBookMarkDate ] = useState(props.book.bookMarkDate);
+  const [ bookPages, setBookPages ] = useState(props.book.bookPages);
+  const [ readStartDate, setReadStartDate ] = useState(props.book.readStartDate);
 
 
 
-  const [editable, setEditable] = useState(false)
+  const [ editable, setEditable ] = useState(false)
 
   function setStateEditable() {
     setEditable(true)
@@ -26,7 +25,7 @@ function BookThumb(props) {
 
   function removeBook(event) {
 
-    fetch(`http://localhost:8080/book/${props.book._id}`, {
+    fetch(`http://localhost:${process.env.REACT_APP_BACKPORT}/book/${props.book._id}`, {
       method: 'DELETE',
       body: "body"
     }).then(response => response.json())
@@ -51,7 +50,7 @@ function BookThumb(props) {
     }
 
 
-    fetch(`http://localhost:8080/book/${props.book._id}`, {
+    fetch(`http://localhost:${process.env.REACT_APP_BACKPORT}/book/${props.book._id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',

@@ -3,7 +3,7 @@ import BookThumb from './BookThumb.js'
 
 function Books() {
 
-  const [books, setBooks] = useState([])
+  const [ books, setBooks ] = useState([])
   // let bookview = []
   useEffect(() => {
     const fetchBooks = async () => {
@@ -11,7 +11,7 @@ function Books() {
 
 
 
-        const response = await fetch('http://localhost:8080/books')
+        const response = await fetch(`http://localhost:${process.env.REACT_APP_BACKPORT}/books`)
         const json = await response.json()
         //  await json.forEach(book => {
         //  bookview.push(

@@ -1,11 +1,11 @@
 {
-  "name": "bookmarker-backend",
-  "version": "0.0.1",
+  "name": "bookmarker-backend-dev",
+  "version": "0.0.2",
   "private": true,
   "description": "backend for bookmarker app",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon index.js",
+    "dev": "npm install --no-package-lock && nodemon index.js",
     "start": "node index.js"
   },
   "author": "Asber",
@@ -13,6 +13,8 @@
   "dependencies": {
     "express": "^4.17.1",
     "mongoose": "^5.11.18",
-    "nodemon": "^2.0.7"
+    "nodemon": "^2.0.7",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5"
   }
 }

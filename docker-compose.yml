@@ -20,7 +20,7 @@ services:
     container_name: bookmarker-db
     env_file: .env
     #links:
-  #    - "backend"
+    #    - "backend"
     image: mongo:4.4-bionic
     #    volumes:
     #      - bookmongo:/data/db

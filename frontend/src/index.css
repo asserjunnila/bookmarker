@@ -25,8 +25,9 @@ code {
 
 
 .card {
-  width: 18rem;
-  margin-right: 1rem;
+  width: 15rem;
+  height: 43rem;
+  margin-right: 0.5rem;
   margin-top: 1rem;
   z-index: 1;
   transition: transform .2s; /* Animation */
@@ -34,7 +35,7 @@ code {
 }
 
 .card:hover {
-  transform: scale(1.01); 
+  transform: scale(1.005); 
 }
 
 
@@ -44,7 +45,7 @@ code {
 
 .edit-button {
   position: absolute;
-  top: 27rem;
+  top: 22.5rem;
   right: 0rem;
   z-index: 4;
 }
@@ -56,5 +57,10 @@ img {
 }
 
 .card-title {
-  margin-bottom: -0.25rem;
+  margin-bottom: -0.20rem;
+}
+
+.remove-button {
+  position: absolute;
+  top: 0rem;
 }

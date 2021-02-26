@@ -8,6 +8,9 @@ function Books() {
   useEffect(() => {
     const fetchBooks = async () => {
       try {
+
+
+
         const response = await fetch('http://localhost:8080/books')
         const json = await response.json()
         //  await json.forEach(book => {

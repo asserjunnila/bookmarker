@@ -1,4 +1,4 @@
-DELETE http://localhost:8080/book/60154273b086611523228100 HTTP/1.1
+DELETE http://localhost:8080/books/60381d9d8a35a00169dd41b8 HTTP/1.1
 
 ###
 
@@ -21,3 +21,16 @@ content-type: application/json
 }
 
 ####
+
+PUT http://localhost:8080/books/'+'60381d9e8a35a00169dd41b9 HTTP/1.1
+content-type: application/json
+
+{
+    "bookName": "Jari Sillanpää",
+    "bookAuthor": "Jariii",
+    "bookImg": "https://d1csarkz8obe9u.cloudfront.net/posterpreviews/action-thriller-book-cover-design-template-3675ae3e3ac7ee095fc793ab61b812cc_screen.jpg?ts=1588152105",
+    "bookMark": "1",
+    "bookMarkDate": "2021-02-24",
+    "bookPages": "100",
+    "readStartDate": "2021-02-24"
+}

@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-
+import React, { useState } from 'react';
+//import { useEffect } from 'react';
 
 
 function BookThumb(props) {
@@ -14,6 +14,12 @@ function BookThumb(props) {
     setEditable(false)
   }
 
+  function removeBook(event) {
+    event.target.parentElement.parentElement.parentElement.remove();
+    console.log(props.book._id)
+
+  }
+
   return (
     <div>
       <div className="col">
@@ -23,6 +29,7 @@ function BookThumb(props) {
             <div className="edit-button">
               {!editable ? <button type="button" className="btn btn-danger" onClick={setStateEditable}>Edit</button> : <button type="button" className="btn btn-success" onClick={setStateImmutable}>Done</button>}
             </div>
+            {editable && <div class="remove-button"><button type="button" className="btn btn-danger" onClick={removeBook}>Remove</button></div>}
           </div>
           <div className="card-body">
 
@@ -31,13 +38,13 @@ function BookThumb(props) {
               {editable ? <input type="text" value={props.book.bookName} class="form-control" /> : <h5 className="card-title">{props.book.bookName}</h5>}
             </div>
 
-            <p>Author</p>
+            <p class="card-title">Author</p>
             <div class="input-group mb-3">
               {editable ? <input type="text" value={props.book.bookAuthor} class="form-control" /> : <h5 className="card-text">{props.book.bookAuthor}</h5>}
             </div>
 
             <div class="row">
-              <div class="col-6"><p>Book mark</p></div><div class="col-6"><p>Pages</p></div>
+              <div class="col-6"><p class="card-title">Book mark</p></div><div class="col-6"><p class="card-title">Pages</p></div>
             </div>
             <div class="input-group mb-3">
               {editable ? <input type="text" class="form-control" value={props.book.bookMark} aria-describedby="basic-addon2" /> : <input type="text" disabled class="form-control" value={props.book.bookMark} aria-describedby="basic-addon2" />}
@@ -47,11 +54,11 @@ function BookThumb(props) {
             </div>
 
             <div class="row">
-              <div class="col-6"><p><p>Mark date</p></p></div><div class="col-6"><p><p>Start date</p></p></div>
+              <div class="col-6 card-title"><p class="card-title"> Mark date</p></div><div class="col-6"><p class="card-title">Start date</p></div>
             </div>
             <div class="input-group mb-3">
-              {editable ? <input type="text" class="form-control" value={props.book.bookMarkDate} aria-describedby="basic-addon2" /> : <input type="text" disabled class="form-control" value={props.book.bookMarkDate} aria-describedby="basic-addon2" />}
-              {editable ? <input type="text" class="form-control" value={props.book.readStartDate} aria-describedby="basic-addon2" /> : <input type="text" disabled class="form-control" value={props.book.readStartDate} aria-describedby="basic-addon2" />}
+              {editable ? <input type="text" class="form-control" value={props.bookMarkDate} aria-describedby="basic-addon2" /> : <input type="text" disabled class="form-control" value={props.book.bookMarkDate} aria-describedby="basic-addon2" />}
+              {editable ? <input type="text" class="form-control" value={props.readStartDate} aria-describedby="basic-addon2" /> : <input type="text" disabled class="form-control" value={props.book.readStartDate} aria-describedby="basic-addon2" />}
               <div class="input-group-append">
               </div>
             </div>

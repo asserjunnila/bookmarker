@@ -26,7 +26,7 @@ code {
 
 .card {
   width: 15rem;
-  height: 43rem;
+  height: auto;
   margin-right: 0.5rem;
   margin-top: 1rem;
   z-index: 1;
@@ -69,4 +69,20 @@ img {
   position: absolute;
   top: 1rem;
   right: -2rem;
+}
+
+textarea {
+  resize: none;
+  width: 50%;
+  height: 2rem;
+  overflow: hidden;
+  border: none;
+}
+
+.book-name {
+  width: 100%;
+}
+
+.book-author {
+  width: 100%;
 }

@@ -1,6 +1,6 @@
 {
   "name": "bookmarker-backend",
-  "version": "0.0.1",
+  "version": "0.0.5",
   "private": true,
   "description": "backend for bookmarker app",
   "main": "index.js",
@@ -13,6 +13,8 @@
   "dependencies": {
     "express": "^4.17.1",
     "mongoose": "^5.11.18",
-    "nodemon": "^2.0.7"
+    "nodemon": "^2.0.7",
+    "cors": "^2.8.5",
+    "body-parser": "^1.19.0"
   }
 }

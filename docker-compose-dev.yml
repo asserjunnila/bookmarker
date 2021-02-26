@@ -9,10 +9,10 @@ services:
   
   baccychan:
     container_name: kirja-back
-    image: kirja-back-dev:0.2
+    image: kirja-back-dev:0.5
     build: 
       context: ./backend
       dockerfile: Dockerfile-compose
     command: node index.js
     environment: 
-      - MONGO_URI=mongodb://mongoloidi:27017/books
+      - MONGO_URL=mongodb://mongoloidi:27017/books

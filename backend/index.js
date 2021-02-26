@@ -9,7 +9,8 @@ app.use(cors())
 //dotenv.config({ path: './config/.env' });
 
 //const DB_URL = process.env.MDB_URL || "mongodb://db:27018/books"
-const DB_URL = "mongodb://localhost:27018/books"
+//TODO: add env variables and make sure localhost is not used
+const DB_URL = process.env.MONGO_URL || "mongodb://localhost:27017/books"
 console.log(DB_URL)
 app.use(bodyParser.urlencoded({ extended: true }))
 

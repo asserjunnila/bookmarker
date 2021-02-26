@@ -33,7 +33,6 @@ exports.create = (req, res) => {
 exports.findAll = (req, res) => {
     Book.find()
         .then(books => {
-            console.log("HERMANNI", books);
             res.send({ "books": books });
         }).catch(err => {
             res.status(500).send({

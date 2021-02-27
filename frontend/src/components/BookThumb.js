@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-function BookThumb(props, update) {
+function BookThumb(props) {
 
   const [bookName, setBookName] = useState(props.book.bookName);
   const [bookAuthor, setBookAuthor] = useState(props.book.bookAuthor);
@@ -25,10 +25,6 @@ function BookThumb(props, update) {
     setEditable(false)
   }
 
-  function handleChange() {
-    props.handleChangeOnParent()
-  }
-
   function removeBook() {
 
     fetch(`http://localhost:${process.env.REACT_APP_BACKPORT}/books/${props.book._id}`, {
@@ -37,7 +33,7 @@ function BookThumb(props, update) {
     }).then(response => response.json())
       .then(data => console.log(data))
 
-    handleChange()
+    props.handleChangeOnParent()
   }
 
   function updateBookValues() {
@@ -80,12 +76,14 @@ function BookThumb(props, update) {
   const handleBookPagesChange = (e) => {
     setBookPages(e.target.value)
   }
+
   const handleReadStartDateChange = (e) => {
     setReadStartDate(e.target.value)
   }
   const handleBookMarkDateChange = (e) => {
     setBookMarkDate(e.target.value)
   }
+
 
   return (
     <div>

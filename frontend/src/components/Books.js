@@ -2,37 +2,28 @@ import { useEffect, useState } from 'react'
 import BookThumb from './BookThumb.js'
 
 function Books() {
-
-
-  const [books, setBooks] = useState({})
+  const [books, setBooks] = useState([])
   const [update, setUpdate] = useState(true)
+  const [hasError, setHasError] = useState(false)
 
-  function handleChangeOnParent() {
-    setUpdate(!update);
-  }
 
   useEffect(() => {
     const fetchBooks = async () => {
       try {
         const response = await fetch(`http://localhost:${process.env.REACT_APP_BACKPORT}/books`)
         const json = await response.json()
-        setBooks(json)
+        setBooks(json.books);
       } catch (error) {
         console.error(error)
+        setHasError(true)
       }
     }
     fetchBooks()
   }, [update])
 
-  const bookview = [];
-  if (books.books) {
-    books.books.forEach(book => {
-      bookview.push(
-        <BookThumb onChange={handleChangeOnParent()} key={book._id} book={book}></BookThumb>
-      )
-    })
+  const handleChangeOnParent = () => {
+    setUpdate(!update);
   }
-
   const addBook = () => {
     // API call for creating a new book
     const payload = {
@@ -62,7 +53,7 @@ function Books() {
         <button type="button" onClick={addBook} className="btn btn-primary"><i className="material-icons medium">add_circle_outline</i></button>
       </div>
       <div className="d-flex flex-row flex-wrap my-flex-container container-fluid">
-        {bookview}
+        {hasError ? <div>Error occured.</div> : (books.map(book => (<BookThumb handleChangeOnParent={handleChangeOnParent} key={book._id} book={book} ></BookThumb>)))}
       </div>
     </div>
   );

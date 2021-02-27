@@ -64,9 +64,9 @@ img {
 }
 
 .add-button {
-  position: absolute;
+  position: fixed;
   top: 1rem;
-  right: -5rem;
+  right: 1rem;
 }
 
 textarea {

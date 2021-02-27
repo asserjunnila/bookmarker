@@ -4,7 +4,12 @@ import BookThumb from './BookThumb.js'
 function Books() {
 
 
-  const [ books, setBooks ] = useState([])
+  const [books, setBooks] = useState({})
+  const [update, setUpdate] = useState(true)
+
+  function handleChangeOnParent() {
+    setUpdate(!update);
+  }
 
   useEffect(() => {
     const fetchBooks = async () => {
@@ -17,40 +22,16 @@ function Books() {
       }
     }
     fetchBooks()
-  }, [])
+  }, [update])
 
   const bookview = [];
   if (books.books) {
     books.books.forEach(book => {
       bookview.push(
-        <BookThumb key={book._id} book={book}></BookThumb>
+        <BookThumb onChange={handleChangeOnParent()} key={book._id} book={book}></BookThumb>
       )
     })
   }
-
-
-
-  /*
-  useEffect(() => {
-    try {
-      fetch('http://localhost:8080/books')
-        .then(json => json.json())
-        .then(data => setBooks(data))
-
-
-      books.books.forEach(book => {
-        bookview.push(
-          <BookThumb key={book._id} book={book}></BookThumb>
-        )
-      })
-
-      setBooksAsElements(bookview)
-    } catch (error) {
-      console.error(error)
-    }
-  }, booksAsElements)
-
-*/
 
   const addBook = () => {
     // API call for creating a new book
@@ -63,7 +44,7 @@ function Books() {
       "bookPages": 1,
       "readStartDate": new Date()
     }
-    fetch(`http://localhost:8080/book/`, {
+    fetch(`http://localhost:${process.env.REACT_APP_BACKPORT}/books/`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -71,7 +52,8 @@ function Books() {
       body: JSON.stringify(payload)
     }).then(response => response.json())
       .then(data => console.log(data))
-    //window.location.reload()
+
+    handleChangeOnParent()
   }
 
   return (

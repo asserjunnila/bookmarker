@@ -1,23 +1,21 @@
 import React, { useEffect, useState } from 'react';
-//import { useEffect } from 'react';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-function BookThumb(props) {
+function BookThumb(props, update) {
 
-  const [ bookName, setBookName ] = useState(props.book.bookName);
-  const [ bookAuthor, setBookAuthor ] = useState(props.book.bookAuthor);
-  const [ bookMark, setBookMark ] = useState(props.book.bookMark);
-  const [ bookImg, setBookImg ] = useState(props.book.bookImg);
-  const [ bookMarkDate, setBookMarkDate ] = useState(props.book.bookMarkDate);
-  const [ bookPages, setBookPages ] = useState(props.book.bookPages);
-  const [ readStartDate, setReadStartDate ] = useState(props.book.readStartDate);
+  const [bookName, setBookName] = useState(props.book.bookName);
+  const [bookAuthor, setBookAuthor] = useState(props.book.bookAuthor);
+  const [bookMark, setBookMark] = useState(props.book.bookMark);
+  const [bookImg, setBookImg] = useState(props.book.bookImg);
+  const [bookMarkDate, setBookMarkDate] = useState(props.book.bookMarkDate);
+  const [bookPages, setBookPages] = useState(props.book.bookPages);
+  const [readStartDate, setReadStartDate] = useState(props.book.readStartDate);
 
 
-  useEffect(() => {
 
-  })
-  const [ editable, setEditable ] = useState(false)
+  const [editable, setEditable] = useState(false)
+
 
   function setStateEditable() {
     setEditable(true)
@@ -27,22 +25,24 @@ function BookThumb(props) {
     setEditable(false)
   }
 
-  function removeBook(event) {
+  function handleChange() {
+    props.handleChangeOnParent()
+  }
 
-    fetch(`http://localhost:${process.env.REACT_APP_BACKPORT}/book/${props.book._id}`, {
+  function removeBook() {
+
+    fetch(`http://localhost:${process.env.REACT_APP_BACKPORT}/books/${props.book._id}`, {
       method: 'DELETE',
       body: "body"
     }).then(response => response.json())
       .then(data => console.log(data))
 
-    //console.log(event.target.parentElement.parentElement.parentElement.toString())
-    //window.location.reload()
-    event.target.parentElement.parentElement.parentElement.parentElement.remove()
+    handleChange()
   }
 
   function updateBookValues() {
+
     setStateImmutable()
-    //console.log(bookName, bookAuthor, bookMark, bookImg, bookMark, bookMarkDate, bookPages, readStartDate)
 
     const payload = {
       "bookName": bookName,
@@ -54,7 +54,7 @@ function BookThumb(props) {
       "readStartDate": readStartDate
     }
 
-    fetch(`http://localhost:${process.env.REACT_APP_BACKPORT}/book/${props.book._id}`, {
+    fetch(`http://localhost:${process.env.REACT_APP_BACKPORT}/books/${props.book._id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -62,6 +62,7 @@ function BookThumb(props) {
       body: JSON.stringify(payload)
     }).then(response => response.json())
       .then(data => console.log(data))
+
   }
 
   const handleBookNameChange = (e) => {

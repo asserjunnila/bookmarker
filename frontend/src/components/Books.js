@@ -25,7 +25,7 @@ function Books() {
     setUpdate(!update);
   }
   const addBook = () => {
-    // API call for creating a new book
+
     const payload = {
       "bookName": "bookName",
       "bookAuthor": "bookAuthor",

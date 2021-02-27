@@ -12,10 +12,7 @@ function BookThumb(props) {
   const [bookPages, setBookPages] = useState(props.book.bookPages);
   const [readStartDate, setReadStartDate] = useState(new Date(props.book.readStartDate));
 
-
-
   const [editable, setEditable] = useState(false)
-
 
   function setStateEditable() {
     setEditable(true)
@@ -30,8 +27,7 @@ function BookThumb(props) {
     fetch(`http://localhost:${process.env.REACT_APP_BACKPORT}/books/${props.book._id}`, {
       method: 'DELETE',
       body: "body"
-    }).then(response => response.json())
-      .then(data => console.log(data))
+    }).then(response => response.json()).catch(err => console.error(err))
 
     props.handleChangeOnParent()
   }
@@ -57,7 +53,7 @@ function BookThumb(props) {
       },
       body: JSON.stringify(payload)
     }).then(response => response.json())
-      .then(data => console.log(data))
+      .catch(err => console.error(err))
 
   }
 
@@ -84,72 +80,69 @@ function BookThumb(props) {
     setBookMarkDate(e)
   }
 
-
   return (
-    <div>
+
+    <div className="card">
       <div>
-        <div className="card">
-          <div>
-            <div>
-              <img src={bookImg} className="card-img-top" alt="..." />
-              <div className="edit-button">
-                {!editable ? <button type="button" className="btn btn-danger" onClick={setStateEditable}><i className="material-icons medium">edit</i></button> : <button type="button" className="btn btn-success" onClick={updateBookValues}><i className="material-icons medium">done</i></button>}
-              </div>
-            </div>
-
-            <div>
-              {editable ? <textarea className="img-edit" onChange={handleBookImgChange} value={bookImg}><button></button></textarea> : <div></div>}
-            </div>
-            {editable && <div className="remove-button"><button type="button" className="btn btn-danger" onClick={removeBook}><i className="material-icons medium">delete</i></button></div>}
+        <div>
+          <img src={bookImg} className="card-img-top" alt="..." />
+          <div className="edit-button">
+            {!editable ? <button type="button" className="btn btn-danger" onClick={setStateEditable}><i className="material-icons medium">edit</i></button> : <button type="button" className="btn btn-success" onClick={updateBookValues}><i className="material-icons medium">done</i></button>}
           </div>
-          <div className="card-body">
+        </div>
 
-            <p className="card-title">Book</p>
-            <div className="input-group mb-3" >
-              {editable ? <textarea className="book-name" onChange={handleBookNameChange} value={bookName}></textarea> : <h5 className="card-title">{bookName}</h5>}
-            </div>
+        <div>
+          {editable ? <textarea className="img-edit" onChange={handleBookImgChange} value={bookImg}><button></button></textarea> : <div></div>}
+        </div>
+        {editable && <div className="remove-button"><button type="button" className="btn btn-danger" onClick={removeBook}><i className="material-icons medium">delete</i></button></div>}
+      </div>
+      <div className="card-body">
 
-            <p className="card-title">Author</p>
-            <div className="input-group mb-3">
-              {editable ? <textarea className="book-author" onChange={handleBookAuthorChange} value={bookAuthor}></textarea> : <h5 className="card-text">{bookAuthor}</h5>}
-            </div>
+        <p className="card-title">Book</p>
+        <div className="input-group mb-3" >
+          {editable ? <textarea className="book-name" onChange={handleBookNameChange} value={bookName}></textarea> : <h5 className="card-title">{bookName}</h5>}
+        </div>
 
-            <div className="row">
-              <div className="col-6"><p className="card-title">Book mark</p></div><div className="col-6"><p className="card-title">Pages</p></div>
-            </div>
-            <div className="input-group mb-3">
-              <div className="row">
-                <div className="col-6">
-                  {editable ? <textarea onChange={handleBookMarkChange} value={bookMark}></textarea> : <textarea disabled value={bookMark}></textarea>}
-                </div>
-                <div className="col-6">
-                  {editable ? <textarea onChange={event => setBookPages(event.target.value)} value={bookPages}></textarea> : <textarea disabled value={bookPages}></textarea>}
-                </div>
-              </div>
-              <div className="input-group-append">
-              </div>
-            </div>
+        <p className="card-title">Author</p>
+        <div className="input-group mb-3">
+          {editable ? <textarea className="book-author" onChange={handleBookAuthorChange} value={bookAuthor}></textarea> : <h5 className="card-text">{bookAuthor}</h5>}
+        </div>
 
-            <div className="row">
-              <div className="col-6 card-title"><p className="card-title"> Mark date</p></div><div className="col-6"><p className="card-title">Start date</p></div>
+        <div className="row">
+          <div className="col-6"><p className="card-title">Book mark</p></div><div className="col-6"><p className="card-title">Pages</p></div>
+        </div>
+        <div className="input-group mb-3">
+          <div className="row">
+            <div className="col-6">
+              {editable ? <textarea onChange={handleBookMarkChange} value={bookMark}></textarea> : <textarea disabled value={bookMark}></textarea>}
             </div>
-            <div className="input-group mb-3">
-              <div className="row">
-                <div className="col-6">
-                  {editable ? <DatePicker selected={bookMarkDate} onChange={handleBookMarkDateChange} className="datepicker" popperPlacement="top-end" showWeekNumbers></DatePicker> : <DatePicker className="datepicker" selected={bookMarkDate} disabled></DatePicker>}
-                </div>
-                <div className="col-6">
-                  {editable ? <DatePicker selected={readStartDate} onChange={handleReadStartDateChange} className="datepicker" popperPlacement="top-end" showWeekNumbers></DatePicker> : <DatePicker className="datepicker" selected={readStartDate} disabled></DatePicker>}
-                </div>
-              </div>
-              <div className="input-group-append">
-              </div>
+            <div className="col-6">
+              {editable ? <textarea onChange={handleBookPagesChange} value={bookPages}></textarea> : <textarea disabled value={bookPages}></textarea>}
             </div>
           </div>
-        </div >
+          <div className="input-group-append">
+          </div>
+        </div>
+
+        <div className="row">
+          <div className="col-6 card-title"><p className="card-title"> Mark date</p></div><div className="col-6"><p className="card-title">Start date</p></div>
+        </div>
+        <div className="input-group mb-3">
+          <div className="row">
+            <div className="col-6">
+              {editable ? <DatePicker selected={bookMarkDate} onChange={handleBookMarkDateChange} className="datepicker" popperPlacement="top-end" showWeekNumbers></DatePicker> : <DatePicker className="datepicker" selected={bookMarkDate} disabled></DatePicker>}
+            </div>
+            <div className="col-6">
+              {editable ? <DatePicker selected={readStartDate} onChange={handleReadStartDateChange} className="datepicker" popperPlacement="top-end" showWeekNumbers></DatePicker> : <DatePicker className="datepicker" selected={readStartDate} disabled></DatePicker>}
+            </div>
+          </div>
+          <div className="input-group-append">
+          </div>
+        </div>
       </div>
     </div >
+
   )
 };
 
-export default BookThumb;
+export default BookThumb

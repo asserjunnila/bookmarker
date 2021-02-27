@@ -8,9 +8,9 @@ function BookThumb(props) {
   const [bookAuthor, setBookAuthor] = useState(props.book.bookAuthor);
   const [bookMark, setBookMark] = useState(props.book.bookMark);
   const [bookImg, setBookImg] = useState(props.book.bookImg);
-  const [bookMarkDate, setBookMarkDate] = useState(props.book.bookMarkDate);
+  const [bookMarkDate, setBookMarkDate] = useState(new Date(props.book.bookMarkDate));
   const [bookPages, setBookPages] = useState(props.book.bookPages);
-  const [readStartDate, setReadStartDate] = useState(props.book.readStartDate);
+  const [readStartDate, setReadStartDate] = useState(new Date(props.book.readStartDate));
 
 
 
@@ -78,10 +78,10 @@ function BookThumb(props) {
   }
 
   const handleReadStartDateChange = (e) => {
-    setReadStartDate(e.target.value)
+    setReadStartDate(e)
   }
   const handleBookMarkDateChange = (e) => {
-    setBookMarkDate(e.target.value)
+    setBookMarkDate(e)
   }
 
 
@@ -123,7 +123,7 @@ function BookThumb(props) {
                   {editable ? <textarea onChange={handleBookMarkChange} value={bookMark}></textarea> : <textarea disabled value={bookMark}></textarea>}
                 </div>
                 <div className="col-6">
-                  {editable ? <textarea onChange={handleBookPagesChange} value={bookPages}></textarea> : <textarea disabled value={bookPages}></textarea>}
+                  {editable ? <textarea onChange={event => setBookPages(event.target.value)} value={bookPages}></textarea> : <textarea disabled value={bookPages}></textarea>}
                 </div>
               </div>
               <div className="input-group-append">
@@ -136,10 +136,10 @@ function BookThumb(props) {
             <div className="input-group mb-3">
               <div className="row">
                 <div className="col-6">
-                  {editable ? <DatePicker selected={new Date()} className="datepicker" popperPlacement="top-end" showWeekNumbers></DatePicker> : <DatePicker className="datepicker" disabled></DatePicker>}
+                  {editable ? <DatePicker selected={bookMarkDate} onChange={handleBookMarkDateChange} className="datepicker" popperPlacement="top-end" showWeekNumbers></DatePicker> : <DatePicker className="datepicker" selected={bookMarkDate} disabled></DatePicker>}
                 </div>
                 <div className="col-6">
-                  {editable ? <DatePicker selected={new Date()} className="datepicker" popperPlacement="top-end" showWeekNumbers></DatePicker> : <DatePicker className="datepicker" disabled></DatePicker>}
+                  {editable ? <DatePicker selected={readStartDate} onChange={handleReadStartDateChange} className="datepicker" popperPlacement="top-end" showWeekNumbers></DatePicker> : <DatePicker className="datepicker" selected={readStartDate} disabled></DatePicker>}
                 </div>
               </div>
               <div className="input-group-append">

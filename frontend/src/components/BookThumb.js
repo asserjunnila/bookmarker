@@ -2,14 +2,20 @@ import React, { useState } from 'react';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
+import {
+  CircularProgressbar,
+  buildStyles
+} from "react-circular-progressbar";
+import "react-circular-progressbar/dist/styles.css";
+
 function BookThumb(props) {
 
   const [bookName, setBookName] = useState(props.book.bookName);
   const [bookAuthor, setBookAuthor] = useState(props.book.bookAuthor);
-  const [bookMark, setBookMark] = useState(props.book.bookMark);
+  const [bookMark, setBookMark] = useState(parseInt(props.book.bookMark));
   const [bookImg, setBookImg] = useState(props.book.bookImg);
   const [bookMarkDate, setBookMarkDate] = useState(new Date(props.book.bookMarkDate));
-  const [bookPages, setBookPages] = useState(props.book.bookPages);
+  const [bookPages, setBookPages] = useState(parseInt(props.book.bookPages));
   const [readStartDate, setReadStartDate] = useState(new Date(props.book.readStartDate));
 
   const [editable, setEditable] = useState(false)
@@ -36,15 +42,22 @@ function BookThumb(props) {
 
     setStateImmutable()
 
+    console.log("before setting", typeof bookMark, typeof bookPages)
+
+    setBookMark((bookMark === null || isNaN(parseInt(bookPages))) ? 1 : parseInt(bookMark))
+    setBookPages((bookPages === null || isNaN(parseInt(bookMark))) ? 1 : parseInt(bookPages))
+
     const payload = {
       "bookName": bookName,
       "bookAuthor": bookAuthor,
       "bookImg": bookImg,
-      "bookMark": bookMark,
+      "bookMark": (bookMark == null || isNaN(parseInt(bookMark))) ? 1 : parseInt(bookMark),
       "bookMarkDate": bookMarkDate,
-      "bookPages": bookPages,
+      "bookPages": (bookPages == null || isNaN(parseInt(bookPages))) ? 1 : parseInt(bookPages),
       "readStartDate": readStartDate
     }
+
+    console.log(payload)
 
     fetch(`http://localhost:${process.env.REACT_APP_BACKPORT}/books/${props.book._id}`, {
       method: 'PUT',
@@ -64,13 +77,13 @@ function BookThumb(props) {
     setBookAuthor(e.target.value)
   }
   const handleBookMarkChange = (e) => {
-    setBookMark(e.target.value)
+    setBookMark(e.target.value > 0 ? e.target.value.replace(/[^0-9]/g, '').replace(/(\..*?)\..*/g, '$1') : '')
   }
   const handleBookImgChange = (e) => {
     setBookImg(e.target.value)
   }
   const handleBookPagesChange = (e) => {
-    setBookPages(e.target.value)
+    setBookPages(e.target.value > 0 ? e.target.value.replace(/[^0-9]/g, '').replace(/(\..*?)\..*/g, '$1') : '')
   }
 
   const handleReadStartDateChange = (e) => {
@@ -108,16 +121,25 @@ function BookThumb(props) {
           {editable ? <textarea className="book-author" onChange={handleBookAuthorChange} value={bookAuthor}></textarea> : <h5 className="card-text">{bookAuthor}</h5>}
         </div>
 
+        <div className="circular-progress-bar">
+          <CircularProgressbar
+            value={parseInt(bookMark) + parseInt(bookPages) !== 2 ? parseInt(bookMark) / parseInt(bookPages) * 100 : 0}
+            strokeWidth={50}
+            styles={buildStyles({
+              strokeLinecap: "butt"
+            })} />
+        </div>
+
         <div className="row">
           <div className="col-6"><p className="card-title">Book mark</p></div><div className="col-6"><p className="card-title">Pages</p></div>
         </div>
         <div className="input-group mb-3">
           <div className="row">
             <div className="col-6">
-              {editable ? <textarea onChange={handleBookMarkChange} value={bookMark}></textarea> : <textarea disabled value={bookMark}></textarea>}
+              {editable ? <textarea type="number" onChange={handleBookMarkChange} value={bookMark}></textarea> : <textarea disabled value={bookMark}></textarea>}
             </div>
             <div className="col-6">
-              {editable ? <textarea onChange={handleBookPagesChange} value={bookPages}></textarea> : <textarea disabled value={bookPages}></textarea>}
+              {editable ? <textarea type="number" onChange={handleBookPagesChange} value={bookPages}></textarea> : <textarea disabled value={bookPages}></textarea>}
             </div>
           </div>
           <div className="input-group-append">

@@ -101,3 +101,10 @@ textarea {
   font-size: xx-small;
 
 }
+
+.circular-progress-bar{
+  width: 25%;
+  position: absolute;
+  margin-top: -5rem;
+  right: 1rem;
+}

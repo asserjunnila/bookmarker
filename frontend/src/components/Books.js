@@ -6,7 +6,6 @@ function Books() {
   const [update, setUpdate] = useState(true)
   const [hasError, setHasError] = useState(false)
 
-
   useEffect(() => {
     const fetchBooks = async () => {
       try {
@@ -24,12 +23,13 @@ function Books() {
   const handleChangeOnParent = () => {
     setUpdate(!update);
   }
+
   const addBook = () => {
 
     const payload = {
       "bookName": "bookName",
       "bookAuthor": "bookAuthor",
-      "bookImg": "http://www.elizabethlawchambers.com/wp-content/uploads/2019/02/Placeholder-500x500.jpg",
+      "bookImg": 'https://thuleitaliaeditrice.org/wp-content/uploads/2016/02/MK_800.jpg',
       "bookMark": 1,
       "bookMarkDate": new Date(),
       "bookPages": 1,

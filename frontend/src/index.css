@@ -6,7 +6,8 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   animation: rotation 0s infinite linear;
-
+  background-color: #06090F;
+  color: white;
 }
 
 @keyframes rotation {
@@ -30,7 +31,9 @@ code {
   margin-right: 0.5rem;
   margin-top: 1rem;
   transition: transform .2s; /* Animation */
-  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  /*box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;*/
+  background-color: #0D1117;
+  border-color: grey;
 }
 
 .card:hover {
@@ -48,14 +51,23 @@ code {
   right: 0rem;
 }
 
-img {
+.img-container{
+  height: 21rem;
+  overflow: hidden;
+}
+
+.card-img-top {
   object-fit: cover;
   width: 100%;
   height: auto;
 }
 
+.on-edit {
+  opacity: 0.5;
+}
+
 .card-title {
-  margin-bottom: -0.20rem;
+  margin-bottom: 0.20rem;
 }
 
 .remove-button {
@@ -76,6 +88,12 @@ textarea {
   overflow: hidden;
   border: none;
   margin-bottom: -1rem;
+  background-color: #0D1117;
+  color: white;
+}
+
+label{
+  color:cornflowerblue;
 }
 
 .book-name {
@@ -89,6 +107,8 @@ textarea {
 .datepicker {
   width: 100%;
   border: none;
+  background-color: #0D1117;
+  color: white;
 }
 
 .img-edit {
@@ -99,6 +119,7 @@ textarea {
   width: 120%;
   height: 2rem;
   font-size: xx-small;
+  color: black;
 
 }
 

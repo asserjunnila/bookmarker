@@ -57,7 +57,6 @@ function BookThumb(props) {
       "readStartDate": readStartDate
     }
 
-    console.log(payload)
 
     fetch(`http://localhost:${process.env.REACT_APP_BACKPORT}/books/${props.book._id}`, {
       method: 'PUT',
@@ -98,9 +97,11 @@ function BookThumb(props) {
     <div className="card">
       <div>
         <div>
-          <img src={bookImg} className="card-img-top" alt="..." />
+          <div className="img-container">
+            <img src={bookImg} style={{ opacity: editable ? 0.5 : 1 }} className="card-img-top" alt="..." />
+          </div>
           <div className="edit-button">
-            {!editable ? <button type="button" className="btn btn-danger" onClick={setStateEditable}><i className="material-icons medium">edit</i></button> : <button type="button" className="btn btn-success" onClick={updateBookValues}><i className="material-icons medium">done</i></button>}
+            {!editable ? <button type="button" className="btn btn-light" onClick={setStateEditable}><i className="material-icons medium">edit</i></button> : <button type="button" className="btn btn-success" onClick={updateBookValues}><i className="material-icons medium">done</i></button>}
           </div>
         </div>
 
@@ -111,27 +112,30 @@ function BookThumb(props) {
       </div>
       <div className="card-body">
 
-        <p className="card-title">Book</p>
+        <label className="card-title">Book</label>
         <div className="input-group mb-3" >
           {editable ? <textarea className="book-name" onChange={handleBookNameChange} value={bookName}></textarea> : <h5 className="card-title">{bookName}</h5>}
         </div>
 
-        <p className="card-title">Author</p>
+        <label className="card-title">Author</label>
         <div className="input-group mb-3">
           {editable ? <textarea className="book-author" onChange={handleBookAuthorChange} value={bookAuthor}></textarea> : <h5 className="card-text">{bookAuthor}</h5>}
         </div>
 
         <div className="circular-progress-bar">
           <CircularProgressbar
-            value={parseInt(bookMark) + parseInt(bookPages) !== 2 ? parseInt(bookMark) / parseInt(bookPages) * 100 : 0}
-            strokeWidth={50}
+            value={parseInt(bookMark) + parseInt(bookPages) !== 2 ? (parseInt(bookMark) / parseInt(bookPages) * 100).toFixed(0) : 0}
+            text={`${(parseInt(bookMark) + parseInt(bookPages) !== 2 ? (parseInt(bookMark) / parseInt(bookPages) * 100).toFixed(0) : 0)} % `}
+            strokeWidth={5}
             styles={buildStyles({
-              strokeLinecap: "butt"
-            })} />
+              trokeLinecap: "butt",
+              pathColor: "#025AA5"
+            })}
+          />
         </div>
 
         <div className="row">
-          <div className="col-6"><p className="card-title">Book mark</p></div><div className="col-6"><p className="card-title">Pages</p></div>
+          <div className="col-6"><label className="card-title">Book mark</label></div><div className="col-6"><label className="card-title">Pages</label></div>
         </div>
         <div className="input-group mb-3">
           <div className="row">
@@ -147,7 +151,7 @@ function BookThumb(props) {
         </div>
 
         <div className="row">
-          <div className="col-6 card-title"><p className="card-title"> Mark date</p></div><div className="col-6"><p className="card-title">Start date</p></div>
+          <div className="col-6 card-title"><label className="card-title"> Mark date</label></div><div className="col-6"><label className="card-title">Start date</label></div>
         </div>
         <div className="input-group mb-3">
           <div className="row">

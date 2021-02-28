@@ -13,7 +13,7 @@
     "react-materialize": "^3.9.7",
     "react-scripts": "4.0.3",
     "web-vitals": "^1.1.0",
-    "react-progress-bar": "^2.0.3"
+    "react-circular-progressbar": "^2.0.3"
   },
   "scripts": {
     "start": "react-scripts start",

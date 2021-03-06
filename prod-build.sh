@@ -14,11 +14,22 @@
 
 # # Script to initiate production optimized versions of each image
 
-# GITCOMMIT=$(git log --pretty=format:'%h' -n 1)
+if git diff-index --quiet HEAD --; then
+  # GITCOMMIT=$(git log --pretty=format:'%h' -n 1)
+  echo "Building prod versions from ${GITCOMMIT}\n"
 
-echo "Building prod versions from ${GITCOMMIT}\n"
+  # echo "Sourcing .env-prod\n"
+  # source .env-prod
+
+  ./prod.sh build $@
+else
+  echo "Working tree contains changes"
+fi
+
+# GITCOMMIT=$(git log --pretty=format:'%h' -n 1)
+#echo "Building prod versions from ${GITCOMMIT}\n"
 
 # echo "Sourcing .env-prod\n"
 # source .env-prod
 
-./prod.sh build $@
+#./prod.sh build $@

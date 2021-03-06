@@ -1,4 +1,4 @@
-FROM node:14.16
+FROM node:14.16-alpine
 
 WORKDIR /app
 
@@ -12,10 +12,7 @@ RUN npm install
 # Using volume mount with compose but lets make sure it works stand alone
 #COPY . .
 
-COPY routes ./routes
-COPY models ./models
-COPY controllers ./controllers
-COPY index.js .
+COPY src/ /app
 
 ARG REACT_APP_BACKPORT
 ENV REACT_APP_BACKPORT ${REACT_APP_BACKPORT:-8080}

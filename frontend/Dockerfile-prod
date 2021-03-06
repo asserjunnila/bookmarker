@@ -1,0 +1,27 @@
+FROM node:14.16 as builder
+
+RUN ["mkdir", "-p", "/app"]
+WORKDIR /app
+
+COPY package.json /app/package.json
+RUN ["npm", "install"]
+
+COPY ./src /app/src
+COPY ./public /app/public
+
+ARG REACT_APP_BACKPORT
+ENV REACT_APP_BACKPORT=${REACT_APP_BACKPORT:-9999}
+
+RUN ["echo", "building env:\n"]
+RUN ["env"]
+RUN ["npm", "run", "build"]
+
+# Use Nginx alpine docker image to serve prod optimized version
+FROM nginx:1.19-alpine
+
+# Lets only take the built application from the build stage
+COPY --from=builder /app/build /usr/share/nginx/html
+
+# Expose default nginx port
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]

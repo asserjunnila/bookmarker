@@ -1,0 +1,57 @@
+version: "3.9"
+
+services:
+  db:
+    container_name: book-db-prod
+    image: mongo:4.4-bionic
+    # volumes:
+    #   - mongo-dev:/data/db
+    # ports:
+    #   - 1337:27017
+  
+  back:
+    container_name: book-back-prod
+    # env_file: .env-prod
+    image: book-back-prod:${GITCOMMIT}
+    build: 
+      context: ./backend
+      dockerfile: Dockerfile-prod
+      args:
+        - REACT_APP_BACKPORT
+    ports:
+      - ${REACT_APP_BACKPORT}:${REACT_APP_BACKPORT}
+    depends_on:
+      - db
+    # volumes:
+    #   - ./backend:/app
+    #   - ./backend/package.json-compose:/app/package.json
+    command: npm start
+    environment: 
+      - MONGO_URL=mongodb://db:27017/books
+
+  front:
+    container_name: book-front-prod
+    #env_file: .env-prod
+    image: book-front-prod:${GITCOMMIT}
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile-prod
+      args:
+        - REACT_APP_BACKPORT
+    ports:
+      - 7777:80
+    depends_on: 
+      - db
+    # environment:
+    #   - NODE_ENV=production
+    #command: npm start
+
+volumes:
+  mongo-dev:
+
+#docker-compose env variable precedence
+# Compose file
+# Shell environment variables
+# Environment file
+# Dockerfile
+# Variable is not defined

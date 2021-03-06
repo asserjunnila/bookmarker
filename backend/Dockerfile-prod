@@ -1,0 +1,22 @@
+FROM node:14.16-alpine
+
+WORKDIR /app
+
+COPY package.json /app/package.json
+
+RUN npm install
+
+# add node_modules/.bin to path
+# ENV PATH /app/node_modules/.bin:$PATH
+
+# Using volume mount with compose but lets make sure it works stand alone
+#COPY . .
+
+COPY src/ /app
+
+ARG REACT_APP_BACKPORT
+ENV REACT_APP_BACKPORT ${REACT_APP_BACKPORT:-8080}
+
+#EXPOSE $REACT_APP_BACKPORT
+
+CMD ["npm", "start"]

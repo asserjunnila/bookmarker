@@ -5,8 +5,8 @@
   "description": "backend for bookmarker app",
   "main": "index.js",
   "scripts": {
-    "dev": "npm install --no-package-lock && nodemon index.js",
-    "start": "node index.js"
+    "dev": "npm install --no-package-lock && nodemon src/index.js",
+    "start": "node src/index.js"
   },
   "author": "Asber",
   "license": "ISC",

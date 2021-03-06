@@ -8,4 +8,4 @@ GITCOMMIT=$(git log --pretty=format:'%h' -n 1)
 
 source .env-prod
 
-docker-compose -f docker-compose-prod.yml $@
+docker-compose -f docker-compose-prod.yml -p bookmarker-prod $@

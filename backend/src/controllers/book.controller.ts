@@ -1,37 +1,16 @@
-const Book = require('../models/book.model.js');
+import Book from '../models/book.model';
+import { Request, Response } from 'express';
 
-exports.create = (req, res) => {
-    // Validate request
-    // TODO: rest of the fields
-    if (!req.body.bookName || !req.body.bookAuthor || !req.body.bookMark
-        || !req.body.bookMarkDate || !req.body.bookPages || !req.body.readStartDate) {
-        return res.status(400).send({
-            message: "missing info"
-        });
-    }
-
-    const book = new Book({
-        bookName: req.body.bookName,
-        bookAuthor: req.body.bookAuthor,
-        bookImg: req.body.bookImg,
-        bookMark: req.body.bookMark,
-        bookMarkDate: req.body.bookMarkDate,
-        bookPages: req.body.bookPages,
-        readStartDate: req.body.readStartDate,
-    });
-
+export function create(req: Request, res: Response) {
+    const { bookName, bookAuthor, bookImg, bookMark, bookMarkDate, bookPages, readStartDate } = req.body;
+    const book = Book.build({ bookName, bookAuthor, bookImg, bookMark, bookMarkDate, bookPages, readStartDate });
     book.save()
-        .then(data => {
-            res.send(data);
-        }).catch(err => {
-            res.status(500).send({
-                message: err.message || "Some error occurred while creating the book. Try again"
-            });
-        });
-};
 
-exports.findAll = (req, res) => {
-    Book.find()
+}
+
+export function findAll(req: Request, res: Response) {
+
+    const book = Book.find({})
         .then(books => {
             res.send({ "books": books });
         }).catch(err => {
@@ -39,9 +18,10 @@ exports.findAll = (req, res) => {
                 message: err.message || "Some error occurred while retrieving books."
             });
         });
+
 };
 
-exports.findOne = (req, res) => {
+export function findOne(req: Request, res: Response) {
     Book.findById(req.params.bookId)
         .then(book => {
             if (!book) {
@@ -62,9 +42,8 @@ exports.findOne = (req, res) => {
         });
 };
 
-exports.update = (req, res) => {
-    //console.log(req)
-    // Validate Request
+export function update(req: Request, res: Response) {
+
     if (!req.body.bookName || !req.body.bookAuthor || !req.body.bookPages || !req.body.bookMarkDate || !req.body.bookPages || !req.body.readStartDate) {
         return res.status(400).send({
             message: `needed book info can not be empty`
@@ -99,7 +78,7 @@ exports.update = (req, res) => {
         });
 };
 
-exports.delete = (req, res) => {
+export function deleteBook(req: Request, res: Response) {
     Book.findByIdAndRemove(req.params.bookId)
         .then(book => {
             if (!book) {

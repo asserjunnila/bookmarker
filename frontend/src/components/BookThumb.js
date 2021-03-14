@@ -2,6 +2,11 @@ import React, { useState } from 'react';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
+// https://openlibrary.org/api/books?bibkeys=ISBN:9780553109535&jscmd=details&format=json
+
+// Google Books API
+// https://www.googleapis.com/books/v1/volumes?q=9782259206006+isbn&maxResults=1
+
 import {
   CircularProgressbar,
   buildStyles
@@ -106,6 +111,7 @@ function BookThumb(props) {
         </div>
 
         <div>
+          {/* {editable ? <textarea className="ISBN-edit" onChange={handleISBNChange} value={bookImg}><button></button></textarea> : <div></div>} */}
           {editable ? <textarea className="img-edit" onChange={handleBookImgChange} value={bookImg}><button></button></textarea> : <div></div>}
         </div>
         {editable && <div className="remove-button"><button type="button" className="btn btn-danger" onClick={removeBook}><i className="material-icons medium">delete</i></button></div>}
@@ -167,7 +173,6 @@ function BookThumb(props) {
         </div>
       </div>
     </div >
-
   )
 };
 

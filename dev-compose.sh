@@ -18,4 +18,4 @@ set -a
 # lets source the .env-dev file as basis
 source .env-dev
 
-docker-compose -f docker-compose-dev.yml $@
+docker-compose -f docker-compose-dev.yml -p bookmarker-dev $@

@@ -21,7 +21,7 @@ function Books() {
   }, [update])
 
   const handleChangeOnParent = () => {
-    setUpdate(!update);
+    setUpdate(!update)
   }
 
   const addBook = () => {
@@ -42,9 +42,9 @@ function Books() {
       },
       body: JSON.stringify(payload)
     }).then(response => response.json())
-      .then(data => console.log(data))
+    // .then(data => console.log(data))
 
-    handleChangeOnParent()
+    setUpdate(!update)
   }
 
   return (

@@ -10,27 +10,25 @@ services:
   back:
     container_name: book-back-dev
     env_file: .env-dev
-    image: book-back-dev:${TAG}
+    image: book-back-dev:${TAGBACK}
     build: 
       context: ./backend
-      dockerfile: Dockerfile-compose
+      dockerfile: Dockerfile-dev
     ports:
       - ${REACT_APP_BACKPORT}:${REACT_APP_BACKPORT}
     depends_on:
       - mongo
     volumes:
-      - ./backend/src:/app/src
-      - ./backend/public:/app/public
-      - ./backend/package.json-compose:/app/package.json
+      - ./backend:/app
     command: npm run dev
 
   front:
     container_name: book-front-dev
     env_file: .env-dev
-    image: book-front-dev:${TAG}
+    image: book-front-dev:${TAGFRONT}
     build:
       context: ./frontend
-      dockerfile: Dockerfile-compose
+      dockerfile: Dockerfile-dev
     ports:
       - ${PORT}:${PORT}
     depends_on: 

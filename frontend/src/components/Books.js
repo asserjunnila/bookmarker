@@ -29,7 +29,7 @@ function Books() {
     const payload = {
       "bookName": "bookName",
       "bookAuthor": "bookAuthor",
-      "bookImg": 'https://thuleitaliaeditrice.org/wp-content/uploads/2016/02/MK_800.jpg',
+      "bookImg": 'img/book_template.jpg',
       "bookMark": 1,
       "bookMarkDate": new Date(),
       "bookPages": 1,

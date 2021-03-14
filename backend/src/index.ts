@@ -1,6 +1,8 @@
-const express = require('express')
-const bodyParser = require('body-parser');
-const cors = require('cors')
+import express from 'express';
+import bodyParser from 'body-parser';
+import cors from 'cors';
+import mongoose from 'mongoose';
+import bookRoutes from './routes/routes';
 
 const app = express()
 app.use(cors())
@@ -15,8 +17,6 @@ console.log(DB_URL)
 app.use(bodyParser.urlencoded({ extended: true }))
 
 app.use(bodyParser.json())
-
-const mongoose = require('mongoose');
 
 mongoose.Promise = global.Promise;
 
@@ -33,9 +33,7 @@ mongoose.connect(DB_URL, {
 app.get('/', (req, res) => {
     res.json({ "message": "Welcome to the book database backend." });
 });
-
-require('./routes/routes.js')(app);
-
+app.use(bookRoutes);
 app.listen(port, () => {
     console.log(`Server listening at http://localhost:${port}`)
 })

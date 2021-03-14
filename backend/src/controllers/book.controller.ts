@@ -1,6 +1,8 @@
-const Book = require('../models/book.model.js');
+// const Book = require('../models/book.model');
+import Book from '../models/book.model';
 
-exports.create = (req, res) => {
+export function create(req: any, res: any) {
+    // exports.create = (req, res) => {
     // Validate request
     // TODO: rest of the fields
     if (!req.body.bookName || !req.body.bookAuthor || !req.body.bookMark
@@ -30,7 +32,8 @@ exports.create = (req, res) => {
         });
 };
 
-exports.findAll = (req, res) => {
+export function findAll(req: any, res: any) {
+    // exports.findAll = (req, res) => {
     Book.find()
         .then(books => {
             res.send({ "books": books });
@@ -41,7 +44,8 @@ exports.findAll = (req, res) => {
         });
 };
 
-exports.findOne = (req, res) => {
+export function findOne(req: any, res: any) {
+    // exports.findOne = (req, res) => {
     Book.findById(req.params.bookId)
         .then(book => {
             if (!book) {
@@ -62,7 +66,8 @@ exports.findOne = (req, res) => {
         });
 };
 
-exports.update = (req, res) => {
+export function update(req: any, res: any) {
+    // exports.update = (req: any, res: any) => {
     //console.log(req)
     // Validate Request
     if (!req.body.bookName || !req.body.bookAuthor || !req.body.bookPages || !req.body.bookMarkDate || !req.body.bookPages || !req.body.readStartDate) {
@@ -99,7 +104,8 @@ exports.update = (req, res) => {
         });
 };
 
-exports.delete = (req, res) => {
+export function remove(req: any, res: any) {
+    // exports.delete = (req: any, res: any) => {
     Book.findByIdAndRemove(req.params.bookId)
         .then(book => {
             if (!book) {

@@ -22,6 +22,7 @@ function BookThumb(props) {
   const [bookMarkDate, setBookMarkDate] = useState(new Date(props.book.bookMarkDate));
   const [bookPages, setBookPages] = useState(parseInt(props.book.bookPages));
   const [readStartDate, setReadStartDate] = useState(new Date(props.book.readStartDate));
+  const [bookISBN, setBookISBN] = useState(props.book.bookISBN);
 
   const [editable, setEditable] = useState(false)
 
@@ -32,6 +33,8 @@ function BookThumb(props) {
   function setStateImmutable() {
     setEditable(false)
   }
+
+
 
   function removeBook() {
 
@@ -47,10 +50,11 @@ function BookThumb(props) {
 
     setStateImmutable()
 
-    console.log("before setting", typeof bookMark, typeof bookPages)
+    // console.log("before setting", typeof bookMark, typeof bookPages)
 
     setBookMark((bookMark === null || isNaN(parseInt(bookPages))) ? 1 : parseInt(bookMark))
     setBookPages((bookPages === null || isNaN(parseInt(bookMark))) ? 1 : parseInt(bookPages))
+    setBookISBN((bookISBN === null || isNaN(parseInt(bookISBN))) ? 1 : parseInt(bookISBN))
 
     const payload = {
       "bookName": bookName,
@@ -59,7 +63,8 @@ function BookThumb(props) {
       "bookMark": (bookMark == null || isNaN(parseInt(bookMark))) ? 1 : parseInt(bookMark),
       "bookMarkDate": bookMarkDate,
       "bookPages": (bookPages == null || isNaN(parseInt(bookPages))) ? 1 : parseInt(bookPages),
-      "readStartDate": readStartDate
+      "readStartDate": readStartDate,
+      "bookISBN": (bookISBN == null || isNaN(parseInt(bookISBN))) ? 1 : parseInt(bookISBN)
     }
 
 
@@ -97,8 +102,34 @@ function BookThumb(props) {
     setBookMarkDate(e)
   }
 
-  return (
+  const handleBookISBNChange = (e) => {
+    setBookISBN(e.target.value > 0 ? e.target.value.replace(/[^0-9]/g, '').replace(/(\..*?)\..*/g,) : '')
+    // setBookISBN(e.target.value > 0 ? e.target.value.replace(/[^0-9]/g, '').replace(/(\..*?)\..*/g, '$1') : '')
+  }
+  const fetchISBNData = (e) => {
 
+    if (bookISBN > 6) {
+      fetch(`https://www.googleapis.com/books/v1/volumes?q=${bookISBN}+isbn&maxResults=1`)
+        .then(response => response.json())
+        .then(data => parseISBNData(data.items[0].volumeInfo))
+        .catch(err => console.log(err))
+    }
+    const parseISBNData = (data) => {
+      const title = data.title
+      const author = data.authors.toString()
+      const pages = data.pageCount
+      const img = data.imageLinks.thumbnail
+      try {
+        if (title.length > 0); setBookName(title)
+        if (author.length > 0); setBookAuthor(author)
+        if (pages > 0); setBookPages(pages)
+        if (img.length > 0); setBookImg(img)
+      } catch (error) {
+        error.log(error)
+      }
+    }
+  }
+  return (
     <div className="card">
       <div>
         <div>
@@ -109,10 +140,11 @@ function BookThumb(props) {
             {!editable ? <button type="button" className="btn btn-light" onClick={setStateEditable}><i className="material-icons medium">edit</i></button> : <button type="button" className="btn btn-success" onClick={updateBookValues}><i className="material-icons medium">done</i></button>}
           </div>
         </div>
-
         <div>
-          {/* {editable ? <textarea className="ISBN-edit" onChange={handleISBNChange} value={bookImg}><button></button></textarea> : <div></div>} */}
-          {editable ? <textarea className="img-edit" onChange={handleBookImgChange} value={bookImg}><button></button></textarea> : <div></div>}
+          {editable ? <div><label className="img-url-label">Kuvan url</label><textarea className="img-edit" onChange={handleBookImgChange} value={bookImg}><button></button></textarea></div> : <div></div>}
+        </div>
+        <div>
+          {editable ? <div><label className="ISBN-label">ISBN</label><textarea className="ISBN-edit" onChange={handleBookISBNChange} value={bookISBN}></textarea><button className="ISBN-button" type="button"><i className="material-icons medium" onClick={fetchISBNData}>cloud_download</i></button></div> : <div></div>}
         </div>
         {editable && <div className="remove-button"><button type="button" className="btn btn-danger" onClick={removeBook}><i className="material-icons medium">delete</i></button></div>}
       </div>
@@ -120,18 +152,16 @@ function BookThumb(props) {
 
         <label className="card-title">Book</label>
         <div className="input-group mb-3" >
-          {editable ? <textarea className="book-name" onChange={handleBookNameChange} value={bookName}></textarea> : <h5 className="card-title">{bookName}</h5>}
+          {editable ? <textarea className="book-name-edit" onChange={handleBookNameChange} value={bookName}></textarea> : <textarea disabled className="book-name" value={bookName}></textarea>}
         </div>
-
         <label className="card-title">Author</label>
         <div className="input-group mb-3">
-          {editable ? <textarea className="book-author" onChange={handleBookAuthorChange} value={bookAuthor}></textarea> : <h5 className="card-text">{bookAuthor}</h5>}
+          {editable ? <textarea className="book-author-edit" onChange={handleBookAuthorChange} value={bookAuthor}></textarea> : <textarea disabled className="book-author" value={bookAuthor}></textarea>}
         </div>
-
         <div className="circular-progress-bar">
           <CircularProgressbar
-            value={parseInt(bookMark) + parseInt(bookPages) !== 2 ? (parseInt(bookMark) / parseInt(bookPages) * 100).toFixed(0) : 0}
-            text={`${(parseInt(bookMark) + parseInt(bookPages) !== 2 ? (parseInt(bookMark) / parseInt(bookPages) * 100).toFixed(0) : 0)} % `}
+            value={parseInt(bookMark) + parseInt(bookPages) !== 2 ? (!isNaN((parseInt(bookMark) / parseInt(bookPages) * 100).toFixed(0)) ? (parseInt(bookMark) / parseInt(bookPages) * 100).toFixed(0) : "") : 0}
+            text={parseInt(bookMark) + parseInt(bookPages) !== 2 ? (!isNaN((parseInt(bookMark) / parseInt(bookPages) * 100).toFixed(0)) ? (parseInt(bookMark) / parseInt(bookPages) * 100).toFixed(0) + "%" : "") : 0}
             strokeWidth={5}
             styles={buildStyles({
               trokeLinecap: "butt",
@@ -139,33 +169,31 @@ function BookThumb(props) {
             })}
           />
         </div>
-
         <div className="row">
-          <div className="col-6"><label className="card-title">Book mark</label></div><div className="col-6"><label className="card-title">Pages</label></div>
+          <div className="col-4"><label className="card-title">Book mark</label></div><div className="col-4"><label className="card-title">Page count</label></div>
         </div>
         <div className="input-group mb-3">
           <div className="row">
-            <div className="col-6">
-              {editable ? <textarea type="number" onChange={handleBookMarkChange} value={bookMark}></textarea> : <textarea disabled value={bookMark}></textarea>}
+            <div className="col-4">
+              {editable ? <textarea type="number" className="bookmark-edit" onChange={handleBookMarkChange} value={bookMark}></textarea> : <textarea disabled value={bookMark}></textarea>}
             </div>
-            <div className="col-6">
-              {editable ? <textarea type="number" onChange={handleBookPagesChange} value={bookPages}></textarea> : <textarea disabled value={bookPages}></textarea>}
+            <div className="col-4">
+              {editable ? <textarea type="number" className="bookpages-edit" onChange={handleBookPagesChange} value={bookPages}></textarea> : <textarea disabled value={bookPages}></textarea>}
             </div>
           </div>
           <div className="input-group-append">
           </div>
         </div>
-
         <div className="row">
-          <div className="col-6 card-title"><label className="card-title"> Mark date</label></div><div className="col-6"><label className="card-title">Start date</label></div>
+          <div className="col-4 card-title"><label className="card-title">Mark date</label></div><div className="col-4"><label className="card-title">Start date</label></div>
         </div>
         <div className="input-group mb-3">
           <div className="row">
-            <div className="col-6">
-              {editable ? <DatePicker selected={bookMarkDate} onChange={handleBookMarkDateChange} className="datepicker" popperPlacement="top-end" showWeekNumbers></DatePicker> : <DatePicker className="datepicker" selected={bookMarkDate} disabled></DatePicker>}
+            <div className="col-4">
+              {editable ? <DatePicker selected={bookMarkDate} onChange={handleBookMarkDateChange} className="datepicker-edit" popperPlacement="top-end" showWeekNumbers></DatePicker> : <DatePicker className="datepicker" selected={bookMarkDate} disabled></DatePicker>}
             </div>
-            <div className="col-6">
-              {editable ? <DatePicker selected={readStartDate} onChange={handleReadStartDateChange} className="datepicker" popperPlacement="top-end" showWeekNumbers></DatePicker> : <DatePicker className="datepicker" selected={readStartDate} disabled></DatePicker>}
+            <div className="col-4">
+              {editable ? <DatePicker selected={readStartDate} onChange={handleReadStartDateChange} className="datepicker-edit" popperPlacement="top-end" showWeekNumbers></DatePicker> : <DatePicker className="datepicker" selected={readStartDate} disabled></DatePicker>}
             </div>
           </div>
           <div className="input-group-append">
@@ -175,5 +203,4 @@ function BookThumb(props) {
     </div >
   )
 };
-
 export default BookThumb

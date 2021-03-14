@@ -2,8 +2,8 @@ import Book from '../models/book.model';
 import { Request, Response } from 'express';
 
 export function create(req: Request, res: Response) {
-    const { bookName, bookAuthor, bookImg, bookMark, bookMarkDate, bookPages, readStartDate } = req.body;
-    const book = Book.build({ bookName, bookAuthor, bookImg, bookMark, bookMarkDate, bookPages, readStartDate });
+    const { bookName, bookAuthor, bookImg, bookMark, bookMarkDate, bookPages, readStartDate, bookISBN } = req.body;
+    const book = Book.build({ bookName, bookAuthor, bookImg, bookMark, bookMarkDate, bookPages, readStartDate, bookISBN });
     book.save()
 
 }
@@ -58,6 +58,7 @@ export function update(req: Request, res: Response) {
         bookMarkDate: req.body.bookMarkDate,
         bookPages: req.body.bookPages,
         readStartDate: req.body.readStartDate,
+        bookISBN: req.body.bookISBN,
     }, { new: true })
         .then(book => {
             if (!book) {

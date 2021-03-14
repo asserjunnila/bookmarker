@@ -1,6 +1,7 @@
 // const Book = require('../models/book.model');
-import Book from '../models/book.model';
 import { Request, Response } from 'express';
+import Book from '../models/book.model';
+
 
 export function create(req: Request, res: Response) {
     // Validate request

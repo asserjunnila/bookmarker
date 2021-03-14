@@ -1,0 +1,8 @@
+{
+  // WORKS ONLY IF MULTI-ROOT WORKSPACE IS ENABLED
+  "terminal.integrated.env.linux": {
+    "PATH": "${fileDirname}/node_modules/.bin:${env.PATH}",
+    "CICCELI": "${workspaceFolder}"
+  },
+  "terminal.integrated.cwd": "${fileDirname}"
+}

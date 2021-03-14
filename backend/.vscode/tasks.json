@@ -1,0 +1,13 @@
+{
+  // See https://go.microsoft.com/fwlink/?LinkId=733558
+  // for the documentation about the tasks.json format
+  // DOESNT WORK WITHOUT MULTI-ROOT WORKSPACE
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "echoNest",
+      "type": "shell",
+      "command": "echo ${workspaceFolder} echo ${env:CICCELI}"
+    }
+  ]
+}

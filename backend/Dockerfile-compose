@@ -1,13 +1,13 @@
 # For fast building for docker-compose since we mount host volume to workdir
-FROM node:14.16
+FROM node:15.11
 
 WORKDIR /app
 
 # add node_modules/.bin to path
-ENV PATH /app/node_modules/.bin:$PATH
+#ENV PATH /app/node_modules/.bin:$PATH
 COPY package.json-compose /app/package.json
 
-RUN npm install --no-package-lock
+RUN npm install
 
 # Using volume mount with compose but lets make sure it works stand alone
 #COPY . .

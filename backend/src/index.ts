@@ -1,5 +1,4 @@
 import express from 'express';
-import bodyParser from 'body-parser';
 import cors from 'cors';
 import mongoose from 'mongoose';
 import bookRoutes from './routes/routes';
@@ -10,13 +9,12 @@ app.use(cors())
 //const dotenv = require('dotenv');
 //dotenv.config({ path: './config/.env' });
 
-const port = process.env.REACT_APP_BACKPORT || 8080
-const DB_URL = process.env.MONGO_URL || "mongodb://localhost:27018/books"
+const port = process.env.REACT_APP_BACKPORT || 8080;
+const DB_URL = process.env.MONGO_URL || "mongodb://localhost:27018/books";
 
-console.log(DB_URL)
-app.use(bodyParser.urlencoded({ extended: true }))
-
-app.use(bodyParser.json())
+console.log(DB_URL);
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 mongoose.Promise = global.Promise;
 

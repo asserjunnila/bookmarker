@@ -1,9 +1,15 @@
-FROM node:14.16
+FROM node:15.11
 
+USER node
 WORKDIR /app
 
-COPY package.json-compose /app/package.json
-RUN npm install --no-package-lock
+USER root
+RUN ["npm", "install", "-g", "npm@7.6.3"]
+
+USER node
+
+COPY --chown=node:node package.json-compose /app/package.json
+#RUN npm install --legacy-peer-deps
 
 # We dont need to copy source codes since we will use docker-compose bind mounts
 #COPY . .

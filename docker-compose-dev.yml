@@ -1,15 +1,13 @@
 version: "3.9"
 
 services:
-  mongoloidi:
+  mongo:
     container_name: book-mongo-dev
     image: mongo:4.4-bionic
     volumes:
       - mongo-dev:/data/db
-    ports:
-      - 1337:27017
   
-  baccychan:
+  back:
     container_name: book-back-dev
     env_file: .env-dev
     image: book-back-dev:${TAG}
@@ -19,15 +17,14 @@ services:
     ports:
       - ${REACT_APP_BACKPORT}:${REACT_APP_BACKPORT}
     depends_on:
-      - mongoloidi
+      - mongo
     volumes:
-      - ./backend:/app
+      - ./backend/src:/app/src
+      - ./backend/public:/app/public
       - ./backend/package.json-compose:/app/package.json
     command: npm run dev
-    environment: 
-      - MONGO_URL=mongodb://mongoloidi:27017/books
 
-  furunto:
+  front:
     container_name: book-front-dev
     env_file: .env-dev
     image: book-front-dev:${TAG}
@@ -37,10 +34,11 @@ services:
     ports:
       - ${PORT}:${PORT}
     depends_on: 
-      - mongoloidi
+      - mongo
+      - back
     volumes: 
       - ./frontend:/app
-      - ./frontend/package.json-compose:/app/package.json
+      # - ./frontend/package.json-compose:/app/package.json
     environment:
       - NODE_ENV=development     # Not needed maybe?
       - CHOKIDAR_USEPOLLING=true # Needed for bind mounts on OSX

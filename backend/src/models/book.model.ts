@@ -8,6 +8,7 @@ interface IBook {
     bookMarkDate: Date;
     bookPages: number;
     readStartDate: Date;
+    bookISBN: number;
 }
 
 interface bookModelInterface extends mongoose.Model<BookDoc> {
@@ -22,6 +23,7 @@ interface BookDoc extends mongoose.Document {
     bookMarkDate: Date;
     bookPages: number;
     readStartDate: Date;
+    bookISBN: number;
 }
 
 const bookSchema = new mongoose.Schema({
@@ -53,6 +55,11 @@ const bookSchema = new mongoose.Schema({
         type: Date,
         required: true
     },
+    bookISBN: {
+        type: Number,
+        required: false
+    },
+
 }, {
     timestamps: true
 });

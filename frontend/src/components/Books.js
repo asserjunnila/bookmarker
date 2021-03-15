@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import BookThumb from './BookThumb.js'
 
-function Books() {
+function Books(props) {
   const [books, setBooks] = useState([])
   const [update, setUpdate] = useState(true)
   const [hasError, setHasError] = useState(false)
@@ -23,6 +23,7 @@ function Books() {
   const handleChangeOnParent = () => {
     setUpdate(!update)
   }
+
 
   const addBook = () => {
     const payload = {

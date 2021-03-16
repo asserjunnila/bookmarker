@@ -25,16 +25,18 @@ function Books() {
   }
 
   const addBook = () => {
-
     const payload = {
       "bookName": "bookName",
       "bookAuthor": "bookAuthor",
-      "bookImg": 'https://thuleitaliaeditrice.org/wp-content/uploads/2016/02/MK_800.jpg',
+      "bookImg": 'img/book_template.jpg',
       "bookMark": 1,
       "bookMarkDate": new Date(),
       "bookPages": 1,
-      "readStartDate": new Date()
+      "readStartDate": new Date(),
+      "bookISBN": 1234
     }
+
+
     fetch(`http://localhost:${process.env.REACT_APP_BACKPORT}/books/`, {
       method: 'POST',
       headers: {
@@ -42,7 +44,8 @@ function Books() {
       },
       body: JSON.stringify(payload)
     }).then(response => response.json())
-    // .then(data => console.log(data))
+      // .then(data => console.log(data))
+      .catch(error => error.log(error))
 
     setUpdate(!update)
   }

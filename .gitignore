@@ -49,6 +49,13 @@ typings/
 # TypeScript cache
 *.tsbuildinfo
 
+# Typescript dist folder
+dist/
+
+# Typescript cpuprofiles and other extra outputs
+# can be generated with tsc --generateCpuProfile tsc-output.cpuprofile for example
+*.cpuprofile
+
 # Optional npm cache directory
 .npm
 
@@ -73,5 +80,4 @@ typings/
 # dotenv environment variables file
 .env
 .env.test
-# .env-prod
 

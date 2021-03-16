@@ -6,6 +6,28 @@
   },
   "remote.autoForwardPorts": false,
   "editor.formatOnSave": true,
+  // This editor directive is for disabling automatic linter fixing
+  "editor.codeActionsOnSave": {
+    "source.fixAll": false,
+    "source.fixAll.eslint": false
+  },
   "files.autoSave": "afterDelay",
-  "files.autoSaveDelay": 10000
+  "files.autoSaveDelay": 10000,
+  "terminal.integrated.cwd": "${fileDirname}",
+  // pattern matching doesnt work here :((((
+  "terminal.integrated.env.linux": {
+    "PATH": "${fileDirname}/node_modules/.bin:${env:PATH}",
+    "HEMULI": "${fileDirname}",
+    "MURSU": "${env:HEMULI%end/*}end/node_modules/.bin"
+  },
+  "eslint.workingDirectories": [
+    "./backend",
+    "./frontend"
+  ],
+  "eslint.validate": [
+    "javascript",
+    "typescript"
+  ],
+  "eslint.onIgnoredFiles": "warn",
+  "eslint.lintTask.options": "src/",
 }

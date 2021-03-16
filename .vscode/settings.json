@@ -28,4 +28,6 @@
     "javascript",
     "typescript"
   ],
+  "eslint.onIgnoredFiles": "warn",
+  "eslint.lintTask.options": "src/",
 }

@@ -6,15 +6,32 @@
     {
       "label": "echo",
       "type": "shell",
-      "command": "echo ${workspaceFolder} ${fileDirname} ${relativeFile} ${env:PATH}"
+      "command": "echo ${workspaceFolder} ${fileDirname} ${relativeFile}"
     },
     {
+      // This type of task can be used to start a bash terminal
       "label": "bashBackend",
       "type": "process",
       "command": "/bin/bash",
       "args": [
         "-l"
       ]
+    },
+    {
+      "label": "listGitModifications",
+      "type": "shell",
+      "command": "${workspaceFolder}/listGitModifications.sh",
+      "args": [
+        "${input:service}"
+      ]
+    }
+  ],
+  "inputs": [
+    {
+      "id": "service",
+      "type": "promptString",
+      "description": "Name of the subfolder (front|back)end",
+      "default": "backend"
     }
   ]
 }

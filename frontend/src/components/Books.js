@@ -1,29 +1,10 @@
 import { useEffect, useState } from 'react'
 import BookThumb from './BookThumb.js'
 
-function Books(props) {
+export default function Books(props, ref) {
   const [books, setBooks] = useState([])
   const [update, setUpdate] = useState(true)
   const [hasError, setHasError] = useState(false)
-
-  useEffect(() => {
-    const fetchBooks = async () => {
-      try {
-        const response = await fetch(`http://localhost:${process.env.REACT_APP_BACKPORT}/books`)
-        const json = await response.json()
-        setBooks(json.books);
-      } catch (error) {
-        console.error(error)
-        setHasError(true)
-      }
-    }
-    fetchBooks()
-  }, [update])
-
-  const handleChangeOnParent = () => {
-    setUpdate(!update)
-  }
-
 
   const addBook = () => {
     const payload = {
@@ -51,16 +32,34 @@ function Books(props) {
     setUpdate(!update)
   }
 
+  useEffect(() => {
+    const fetchBooks = async () => {
+      try {
+        const response = await fetch(`http://localhost:${process.env.REACT_APP_BACKPORT}/books`)
+        const json = await response.json()
+        setBooks(json.books);
+      } catch (error) {
+        console.error(error)
+        setHasError(true)
+      }
+    }
+    fetchBooks()
+  }, [update])
+
+  const handleChangeOnParent = () => {
+    setUpdate(!update)
+  }
+
+
   return (
     <div className="container">
       <div className="add-button">
         <button type="button" onClick={addBook} className="btn btn-primary"><i className="material-icons medium">add_circle_outline</i></button>
       </div>
-      <div className="d-flex flex-row flex-wrap my-flex-container container-fluid">
+      <div className="book-container">
         {hasError ? <div>Error occured.</div> : (books.map(book => (<BookThumb handleChangeOnParent={handleChangeOnParent} key={book._id} book={book} ></BookThumb>)))}
       </div>
     </div>
   );
 }
 
-export default Books

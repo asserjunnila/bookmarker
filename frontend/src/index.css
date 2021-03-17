@@ -30,7 +30,9 @@ code {
   width: 18.2rem;
   height: auto;
   margin-right: 0.5rem;
+  margin-left: 0.5rem;
   margin-top: 1rem;
+  margin-bottom: 1rem;
   transition: transform .2s; /* Animation */
   /*box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;*/
   background-color: #0D1117;
@@ -123,7 +125,6 @@ label{
   border-color: grey;
   border-style: solid;
 }
-
 
 .bookmark-edit {
   width: 100%;
@@ -237,13 +238,20 @@ label{
   top: 0px; left: 0;
   z-index: -100;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  
+  padding-left: 1rem;
 }
 
 .container {
+  width: 80%;
   min-height: calc(100vh - 12rem);
+}
+
+.book-container {
+  display: flex;
+  flex-flow: wrap;
+  justify-content: center;
 }
 
 ::-webkit-scrollbar {

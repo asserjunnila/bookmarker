@@ -1,10 +1,10 @@
-import Router, { Request, Response } from 'express'
-import * as bookController from '../controllers/book.controller'
+import Router, { Request, Response } from 'express';
+import * as bookController from '../controllers/book.controller';
 
-const router = Router()
+const router = Router();
 
 router.get('/', (req: Request, res: Response) => {
-    res.json({ "message": "Welcome to the book database backend." });
+  res.json({ message: 'Welcome to the book database backend.' });
 });
 
 router.post('/books', bookController.create);
@@ -17,4 +17,4 @@ router.put('/books/:bookId', bookController.update);
 // Delete an book with bookId
 router.delete('/books/:bookId', bookController.deleteBook);
 
-export default router
+export default router;

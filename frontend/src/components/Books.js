@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import BookThumb from './BookThumb.js'
 
-export default function Books(props, ref) {
+export default function Books() {
   const [books, setBooks] = useState([])
   const [update, setUpdate] = useState(true)
   const [hasError, setHasError] = useState(false)
@@ -26,7 +26,6 @@ export default function Books(props, ref) {
       },
       body: JSON.stringify(payload)
     }).then(response => response.json())
-      // .then(data => console.log(data))
       .catch(error => error.log(error))
 
     setUpdate(!update)
@@ -50,7 +49,6 @@ export default function Books(props, ref) {
     setUpdate(!update)
   }
 
-
   return (
     <div className="container">
       <div className="add-button">
@@ -62,4 +60,3 @@ export default function Books(props, ref) {
     </div>
   );
 }
-

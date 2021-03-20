@@ -2,9 +2,7 @@ import React, { useState } from 'react';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-// https://openlibrary.org/api/books?bibkeys=ISBN:9780553109535&jscmd=details&format=json
-
-// Google Books API
+// Google Books API url example
 // https://www.googleapis.com/books/v1/volumes?q=9782259206006+isbn&maxResults=1
 
 import {
@@ -34,8 +32,6 @@ function BookThumb(props) {
     setEditable(false)
   }
 
-
-
   function removeBook() {
 
     fetch(`http://localhost:${process.env.REACT_APP_BACKPORT}/books/${props.book._id}`, {
@@ -49,8 +45,6 @@ function BookThumb(props) {
   function updateBookValues() {
 
     setStateImmutable()
-
-    // console.log("before setting", typeof bookMark, typeof bookPages)
 
     setBookMark((bookMark === null || isNaN(parseInt(bookPages))) ? 1 : parseInt(bookMark))
     setBookPages((bookPages === null || isNaN(parseInt(bookMark))) ? 1 : parseInt(bookPages))
@@ -67,7 +61,6 @@ function BookThumb(props) {
       "bookISBN": (bookISBN == null || isNaN(parseInt(bookISBN))) ? 1 : parseInt(bookISBN)
     }
 
-
     fetch(`http://localhost:${process.env.REACT_APP_BACKPORT}/books/${props.book._id}`, {
       method: 'PUT',
       headers: {
@@ -76,7 +69,6 @@ function BookThumb(props) {
       body: JSON.stringify(payload)
     }).then(response => response.json())
       .catch(err => console.error(err))
-
   }
 
   const handleBookNameChange = (e) => {
@@ -106,8 +98,8 @@ function BookThumb(props) {
     setBookISBN(e.target.value > 0 ? e.target.value.replace(/[^0-9]/g, '').replace(/(\..*?)\..*/g,) : '')
     // setBookISBN(e.target.value > 0 ? e.target.value.replace(/[^0-9]/g, '').replace(/(\..*?)\..*/g, '$1') : '')
   }
-  const fetchISBNData = (e) => {
 
+  const fetchISBNData = (e) => {
     if (bookISBN > 6) {
       fetch(`https://www.googleapis.com/books/v1/volumes?q=${bookISBN}+isbn&maxResults=1`)
         .then(response => response.json())
@@ -129,6 +121,7 @@ function BookThumb(props) {
       }
     }
   }
+
   return (
     <div className="card">
       <div>

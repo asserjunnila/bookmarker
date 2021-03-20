@@ -1,4 +1,4 @@
-import { useState } from "react";
+
 
 function Footer() {
 
@@ -10,12 +10,9 @@ function Footer() {
     'Kas olete näinud, kuidas Chuck Norris peksab?' // Viro
   ]
 
-  const [sentence, setSentence] = useState(sentences[Math.floor(Math.random() * sentences.length)])
-
-
   return (
     <div className="footer">
-      <h6>{sentence}</h6>
+      <h6>{sentences[Math.floor(Math.random() * sentences.length)]}</h6>
     </div>
   );
 }

@@ -20,30 +20,34 @@ export function findAll(req: Request, res: Response) {
 
 export function findOne(req: Request, res: Response) {
   Book.findById(req.params.bookId)
-    .then(book => {
+    .then((book) => {
       if (!book) {
         return res.status(404).send({
-          message: 'book not found with id ${req.params.bookId}',
+          message: `book not found with id ${req.params.bookId}`,
         });
       }
       res.send(book);
-    }).catch(err => {
+    }).catch((err) => {
       if (err.kind === 'ObjectId') {
         return res.status(404).send({
-          message: 'book not found with id ${req.params.bookId}',
+          message: `book not found with id ${req.params.bookId}`,
         });
       }
       return res.status(500).send({
-        message: 'Error retrieving book with id ' + req.params.bookId
+        message: `Error retrieving book with id ${req.params.bookId}`,
       });
     });
 }
 
 export function update(req: Request, res: Response) {
-
-  if (!req.body.bookName || !req.body.bookAuthor || !req.body.bookPages || !req.body.bookMarkDate || !req.body.bookPages || !req.body.readStartDate) {
+  if (!req.body.bookName
+    || !req.body.bookAuthor
+    || !req.body.bookPages
+    || !req.body.bookMarkDate
+    || !req.body.bookPages
+    || !req.body.readStartDate) {
     return res.status(400).send({
-      message: `needed book info can not be empty`
+      message: 'needed book info can not be empty',
     });
   }
 
@@ -57,14 +61,14 @@ export function update(req: Request, res: Response) {
     readStartDate: req.body.readStartDate,
     bookISBN: req.body.bookISBN,
   }, { new: true })
-    .then(book => {
+    .then((book) => {
       if (!book) {
         return res.status(404).send({
-          message: "book not found with id " + req.params.bookId
+          message: 'book not found with id ' + req.params.bookId
         });
       }
       res.send(book);
-    }).catch(err => {
+    }).catch((err) => {
       if (err.kind === 'ObjectId') {
         return res.status(404).send({
           message: "book not found with id " + req.params.bookId
@@ -78,14 +82,14 @@ export function update(req: Request, res: Response) {
 
 export function deleteBook(req: Request, res: Response) {
   Book.findByIdAndRemove(req.params.bookId)
-    .then(book => {
+    .then((book) => {
       if (!book) {
         return res.status(404).send({
           message: "book not found with id " + req.params.bookId
         });
       }
       res.send({ message: "book deleted successfully!" });
-    }).catch(err => {
+    }).catch((err) => {
       if (err.kind === 'ObjectId' || err.name === 'NotFound') {
         return res.status(404).send({
           message: "book not found with id " + req.params.bookId

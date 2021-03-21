@@ -64,10 +64,6 @@ function Books() {
     fetchBooks()
   }, [ update ])
 
-  const handleChangeOnParent = () => {
-    setUpdate(!update)
-  }
-
   return (
     <div className="container">
       <div className="add-button">

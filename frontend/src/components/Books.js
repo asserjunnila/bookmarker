@@ -2,9 +2,9 @@ import { useEffect, useState } from 'react'
 import BookThumb from './BookThumb.js'
 
 function Books() {
-  const [books, setBooks] = useState([])
-  const [update, setUpdate] = useState(true)
-  const [hasError, setHasError] = useState(false)
+  const [ books, setBooks ] = useState([])
+  const [ update, setUpdate ] = useState(true)
+  const [ hasError, setHasError ] = useState(false)
 
   useEffect(() => {
     const fetchBooks = async () => {
@@ -18,7 +18,7 @@ function Books() {
       }
     }
     fetchBooks()
-  }, [update])
+  }, [ update ])
 
   const handleChangeOnParent = () => {
     setUpdate(!update)
@@ -45,7 +45,7 @@ function Books() {
       body: JSON.stringify(payload)
     }).then(response => response.json())
       // .then(data => console.log(data))
-      .catch(error => error.log(error))
+      .catch(error => console.log(error))
 
     setUpdate(!update)
   }

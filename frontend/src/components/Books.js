@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import BookThumb from './BookThumb.js'
 
-export default function Books() {
+function Books() {
   const [books, setBooks] = useState([])
   const [update, setUpdate] = useState(true)
   const [hasError, setHasError] = useState(false)
@@ -60,3 +60,5 @@ export default function Books() {
     </div>
   );
 }
+
+export default Books

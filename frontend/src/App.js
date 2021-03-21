@@ -1,9 +1,6 @@
-import React from 'react';
 import Books from './components/Books.js';
-import Footer from './components/Footer.js'
-import Header from './components/Header.js'
-
-
+import Footer from './components/Footer.js';
+import Header from './components/Header.js';
 
 function App() {
 

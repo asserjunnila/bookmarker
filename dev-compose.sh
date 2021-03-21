@@ -6,7 +6,7 @@ set -e
 # print commands and arguments
 set -x
 
-# all assignments arguments are palced in the environment
+# all assignments arguments are placed in the environment
 set -k
 
 # mark variables which are modified or created for export
